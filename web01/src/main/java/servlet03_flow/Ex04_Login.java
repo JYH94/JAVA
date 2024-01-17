@@ -44,8 +44,8 @@ public class Ex04_Login extends HttpServlet {
 		StudentService service = new StudentService();
 		StudentDTO dto = service.selectOne(sno);
 		if (dto != null && dto.getName().equals(name)) {
-			request.getSession().setAttribute("loginName", name);
 			request.getSession().setAttribute("loginID", sno);
+			request.getSession().setAttribute("loginName", name);
 			System.out.println(" 로그인 성공 ");
 			System.out.println(" 로그인 Student => " + dto);
 			response.sendRedirect(uri);

@@ -19,6 +19,8 @@ public class StudentDTO {
 		this.jno = jno;
 		this.info = info;
 		this.point = point;
+		// getter/setter 설정시 멤버변수명의 낙타문자 적용하면
+		// JSTL 사용시 오류가 발생 => 멤버변수에 대문자사용 금지
 	}
 
 	public int getSno() {

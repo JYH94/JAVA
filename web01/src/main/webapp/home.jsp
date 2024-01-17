@@ -67,6 +67,7 @@
 			<a href="/web01/servletTestForm/flowEx04_LoginForm.jsp">Login</a>&nbsp;
 			<br>&nbsp;
 	<%	} else { %>
+			<a href="/web01/detail2">Myinfo</a>
 			<a href="/web01/logout">Logout</a>
 			<br>&nbsp;  
 	<%	} %>
@@ -91,5 +92,6 @@
 	<a href="/web01/jsp01/ex01_HelloJsp.jsp">HelloJ</a>
 	<a href="/web01/jsp01/ex02_mvc01List.jsp">M01ListJ</a>
 	<a href="/web01/list2">M02List</a>
+	<a href="/web01/list2j">M02List(JSTL)</a>
 </body>
 </html>

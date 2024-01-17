@@ -36,8 +36,8 @@
            step 을 지정하지 않으면 1씩 증가     
 </pre>
 
-스텝이 2일 때
-<table border=1;>
+** 스텝이 2일 때 **
+<table border=1; style="text-align:center; "width:90%;>
 <tr>
 	<th>숫자</th>
 	<th>인덱스</th>
@@ -55,8 +55,8 @@
 <br>
 <br>
 
-스텝이 1일 때
-<table border=1;>
+** 스텝이 1일 때 **
+<table border=1 style="text-align:center; "width:90%;>
 <tr>
 	<th>숫자</th>
 	<th>인덱스</th>
@@ -70,12 +70,65 @@
 			<td>${Q.count}</td>
 		</c:if>
 		
-		<c:if test="${num%2 != 0}">
-		</c:if>
+		<c:if test="${num%2 != 0}"></c:if>
 		
 	</tr>
 </c:forEach>
+<!-- 
+위 반복문을 돌리면 숫자가 2,4,6,8,10 이 찍히고
+인덱스도 2,4,6,8,10이 찍히는 모습을 볼 수 있다.
+그 이유는 시작점이 1 / 종료점이 10일 뿐이지 배열이 아니기 때문이다.
+forEach반복문이 1부터 돌면서 조건문을 통해 건너뛰기 때문에
+인덱스가 1,2,3,4,5가 아닌 2,4,6,8,10이 찍힌다.
+ -->
 </table>
+
+=> 실습 3) 1~30 을 다음처럼 1행에 5개씩 출력하세요~<br>
+<!-- 
+1,2,3,4,5
+6,7,8,9,10
+11,12,13,14,15
+...
+............30 -->
+<br>
+
+** 중첩 FOR문 **<br>
+<c:forEach var="num1" begin="0" end="5" varStatus="vs1">
+	<c:forEach var="num2" begin="${5*num1 + 1}" end="${5*num1 + 5}" varStatus="vs2">
+		<%-- <c:if test="${vs2.last == false}">
+			${num2},
+		</c:if>
+		<c:if test="${vs2.last}">
+			${num2}<br>
+		</c:if>
+		 --%>
+		 <!-- 삼항연산자 사용하는 방법 -->
+		${num2}
+		${vs2.last ? "<br>" : ", "}
+	</c:forEach>
+</c:forEach>
+
+
+<br>
+
+** FOR문 + 조건문 **<br>
+<c:forEach var="i" begin="1" end="30" step="1" varStatus="vs">
+<%-- 	<c:choose>
+		<c:when test="${i %5 != 0}">
+			${i},
+		</c:when>
+		
+		<c:when test="${i %5 == 0}">
+			${i}
+			<br>
+		</c:when>
+	</c:choose>
+	 --%>
+	 <!-- 삼항연산자 사용 -->
+	${i}
+	${i%5 == 0 ? "<br>" : ", " }
+	
+</c:forEach>
 
 
 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="mvcTest.StudentDTO, java.util.List" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +14,7 @@
 // 컨트롤러에서 Attribute에 request에 담은 list를 꺼내와서 쓰기
 	List<StudentDTO> list = (List<StudentDTO>)request.getAttribute("myList");
 %>
+<!-- mylist에 담는과정은 어딨어..?? -->
 
 
 <table border="1" style="width:100%">

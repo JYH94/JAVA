@@ -36,20 +36,20 @@ pageContext.setAttribute("menuList", menu);
 	Test 1) forEach 기본형식 
 	<br> 
 	<c:forEach var="menu" items="${pageScope.menuList}" varStatus="m"> 
-	<ul>
-		<%-- <c:if test="${m.first == true}">
-			<li style=color:blue>${menu}, &nbsp;</li>
-		</c:if>
+		<ul>
+			<c:if test="${m.first}">
+				<li style=color:blue>${menu}, &nbsp;</li>
+			</c:if>
+			
+			<c:if test="${ !m.first && !m.last }">
+				<li>${menu}, &nbsp;</li>
+			</c:if>
+			
+			<c:if test="${m.last}">
+				<li>${menu}.</li>
+			</c:if>
 		
-		<c:if test="${m.first == false && m.last == false}">
-			<li>${menu}, &nbsp;</li>
-		</c:if>
-		
-		<c:if test="${m.last == true && m.first == false}">
-			<li>${menu}</li>
-		</c:if> --%>
-		
-		<c:choose>
+<%-- 		<c:choose>
 			<c:when test="${m.first}">
 				<li style=color:blue>${menu},</li>
 			</c:when>
@@ -61,13 +61,9 @@ pageContext.setAttribute("menuList", menu);
 			<c:otherwise>
 				<li>${menu},</li>
 			</c:otherwise>
-		</c:choose> 
-		
-		
-		
-		
+		</c:choose>  --%>
 
-	</ul>
+		</ul>
 	
 	</c:forEach> 
 	<br><br>
@@ -82,13 +78,13 @@ pageContext.setAttribute("menuList", menu);
 			<th>last</th>
 		</tr>
 		<c:forEach var="menu" items="${menuList}" varStatus="vs">
-		<tr>
-			<td>${menu}</td>
-			<td>${vs.index}</td>
-			<td>${vs.count}</td>
-			<td>${vs.first}</td>
-			<td>${vs.last}</td>
-		</tr>
+			<tr>
+				<td>${menu}</td>
+				<td>${vs.index}</td>
+				<td>${vs.count}</td>
+				<td>${vs.first}</td>
+				<td>${vs.last}</td>
+			</tr>
 		</c:forEach>
 
 
