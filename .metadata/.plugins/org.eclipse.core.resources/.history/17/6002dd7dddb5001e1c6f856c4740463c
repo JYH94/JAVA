@@ -1,0 +1,55 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>** Web02_MVC02 MemberList **</title>
+</head>
+<body>
+<h2>** Web02_MVC02 MemberList **</h2>
+
+<hr>
+<c:if test="${!empty requestScope.message}">
+	=> ${requestScope.message}<br>
+	<hr>
+</c:if>
+
+<table>
+	<tr>
+		<td>id</td>
+		<td>password</td>
+		<td>name</td>
+		<td>age</td>
+		<td>jno</td>
+		<td>info</td>
+		<td>point</td>
+		<td>birthday</td>
+		<td>rid</td>
+	</tr>
+	
+	<c:if test="${!empty requestScope.banana}">
+	<c:forEach var="list"  items="${requestScope.banana}">
+		<tr>
+			<td>list</td>
+			<td>list</td>
+			<td>list</td>
+			<td>list</td>
+			<td>list</td>
+			<td>list</td>
+			<td>list</td>
+			<td>list</td>
+			<td>list</td>
+		</tr>
+	</c:forEach>
+	</c:if>
+</table>
+<hr>
+
+<% request.getAttribute("banana"); %>
+	
+	
+	
+</body>
+</html>

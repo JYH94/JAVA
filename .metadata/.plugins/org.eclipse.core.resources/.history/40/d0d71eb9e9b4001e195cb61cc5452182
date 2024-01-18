@@ -1,0 +1,42 @@
+package mvcTest;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Ex02_MVC02Detail
+ */
+@WebServlet("/detail2")
+public class Ex02_MVC02Detail extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    public Ex02_MVC02Detail() {
+        super();
+    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		StudentService service = new StudentService();
+		StudentDTO dto = service.selectOne((int)request.getSession().getAttribute("loginID"));
+		// 1. 로그인 하게되면 requestScope에 저장되는 정보를 DTO 객체에 저장
+		// 2. DTO 객체에 저장할땐, requestScope에 저장된 SNO를 통해서 selectOne 메서드를 사용하면 될거 같은데..
+		
+		
+		request.setAttribute("myInfo", dto);
+		
+		
+		request.getRequestDispatcher("mvcTestJsp/ex02_MVC02Detail.jsp").forward(request, response);
+		
+		
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}

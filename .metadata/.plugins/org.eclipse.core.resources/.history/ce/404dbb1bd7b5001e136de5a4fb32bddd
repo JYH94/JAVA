@@ -1,0 +1,11 @@
+package service;
+
+import java.util.List;
+
+import domain.MemberDTO;
+
+public class MemberService {
+	
+	// ** selectList
+		public List<MemberDTO> selectList() {
+}

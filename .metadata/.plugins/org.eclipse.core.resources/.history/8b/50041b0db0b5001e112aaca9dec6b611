@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>** Make Cookie **</title>
+</head>
+<body>
+<h2>** Make Cookies **</h2>
+<pre>
+=> Cookie 객체 생성 -> 생성자의 매개변수로 name, value 를 지정
+=> response 에 담기
+<%
+
+%>
+<hr>
+=> <a href="ex01_viewCookies.jsp">ViewCookies</a>
+=> <a href="ex03_upDelCookies.jsp">UpDelCookies</a> 
+</pre>
+</body>
+</html>

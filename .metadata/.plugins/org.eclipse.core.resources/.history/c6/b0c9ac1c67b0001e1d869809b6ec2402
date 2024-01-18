@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="get">
+        <label for="userid">아이디
+            <input type="text" name="userid" id="userid">
+        </label>
+        <label for="userid">비밀번호
+            <input type="text" name="userid" id="userid">
+        </label>
+    </form>
+</body>
+
+</html>
