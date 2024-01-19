@@ -30,11 +30,12 @@
     <fullyQualifiedTypeName name="mvcTest.StudentService"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
     <fullyQualifiedTypeName name="mvcTest.StudentDTO"/>
-    <fullyQualifiedTypeName name="service.MemberService"/>
     <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="domain.MemberDTO"/>
     <fullyQualifiedTypeName name="org.apache.jasper.tagplugins.jstl.core.Out"/>
-    <fullyQualifiedTypeName name="java.io.PrintWriter"/>
     <fullyQualifiedTypeName name="com.sun.source.tree.DoWhileLoopTree"/>
     <fullyQualifiedTypeName name="model.MemberDAO"/>
+    <fullyQualifiedTypeName name="service.MemberService"/>
+    <fullyQualifiedTypeName name="java.io.PrintWriter"/>
+    <fullyQualifiedTypeName name="domain.MemberDTO"/>
+    <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
 </qualifiedTypeNameHistroy>

@@ -23,14 +23,10 @@
 -> 2.1) JSP Action Tag <br>
 Jsp 문서의 완성된 웹페이지가 포함됨, 변수공유 불가능 (코드호환이 안됨)<br>
 <jsp:include page="ex01_HelloJsp.jsp" />
-<!-- jsp 태그를 사용할때 page 태그를 사용하는 이유는 저 파일 자체가
-include 되는것이 아니라 로딩된 페이지가 오기 때문이다. -->
 <%-- => 변수 공유 확인 : name = <%= name %> -> 컴파일오류 --%>
 -> 2.2) Directive include Test <br>
 Jsp 문서의 소스코드가 포함됨, 변수공유 가능 (코드호환이 됨)<br>
 <%@ include file="ex01_HelloJsp.jsp" %>
-<!-- jsp 태그를 사용할때와는 다르게 file 태그를 사용한다. 그 이유는
-위와는 다르게 해당 src를 가져와서 로딩시키는 방식이기 때문이다.  -->
 <hr>
 => 변수 공유 확인 : name = <%= name %>
 <hr>

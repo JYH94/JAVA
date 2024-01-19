@@ -39,7 +39,8 @@
 		multiply(i,j)의 결과는 짝수 <%= multiply(i,j)%> 입니다 <br>
 <%	} else { %>
 		multiply(i,j)의 결과는 홀수 <%= multiply(i,j)%> 입니다 <br>
-<%	}%>
+<%	}
+%>
 
 
 </body>

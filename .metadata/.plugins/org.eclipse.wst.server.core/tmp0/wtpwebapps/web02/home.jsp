@@ -11,8 +11,8 @@
 <body>
 	<h2>Dynamic Web Project</h2>
 	<c:choose>
-		<c:when test="${sessionScope.loginName != null }">
-			<h3>${sessionScope.loginName}님 안녕하세요</h3>
+		<c:when test="${sessionScope.loginId != null }">
+			<h3>${sessionScope.loginId}님 안녕하세요</h3>
 		</c:when>
 		<c:otherwise>
 			<h3>로그인 후 이용하세요</h3>
@@ -35,13 +35,13 @@
 	</c:choose> --%>
 	
 	<%
-		if (request.getSession().getAttribute("loginName") == null) {
+		if (request.getSession().getAttribute("loginId") == null) {
 	%>
-			<a href="/web02/member/LoginForm.jsp">Login</a>&nbsp;
-			<a href="/web02/member/JoinForm.jsp">Join</a>&nbsp;
+			<a href="/web02/member/loginForm.jsp">Login</a>&nbsp;
+			<a href="/web02/member/joinForm.jsp">Join</a>&nbsp;
 			<br>&nbsp;
 	<%	} else { %>
-			<a href="/web02/mdetail">Myinfo</a>
+			<a href="/web02/C03_mDetail">Myinfo</a>
 			<a href="/web02/logout">Logout</a>
 			<br>&nbsp;  
 	<%	} %>

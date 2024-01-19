@@ -27,7 +27,6 @@ public class C01_mList extends HttpServlet {
 		
 		// 2) Service 처리, 처리결과 보관
 		request.setAttribute("banana", service.selectList());
-		System.out.println("다오");
 		// 3)
 		request.getRequestDispatcher("member/memberList.jsp").forward(request, response);
 		
