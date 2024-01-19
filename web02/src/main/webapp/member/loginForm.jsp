@@ -9,19 +9,22 @@
 </head>
 <body>
 	<form action="/web02/login" method="post">
-	아이디 <input type="text" name="id" id="id"/><br>
-	비밀번호 <input type="text" name="password" id="password"/><br>
-	<input type="submit">
-	<input type="reset" value="취소"/>
+		아이디 <input type="text" name="id" id="id"/><br>
+		비밀번호 <input type="text" name="password" id="password"/><br>
+		<input type="submit">
+		<input type="reset" value="취소"/>
 	</form>
 	
 	
-	<a herf="home.jsp">Home</a> &nbsp;
-	<a herf="home.jsp">이전으로</a>
+	<a href="/web02/home.jsp">홈으로</a>
 	
 	<br>
+	
 	<c:if test="${requestScope.loginId == null }">
 		${requestScope.message}
+	</c:if>
+	<c:if test="${sessionScope.jMessage != null }">
+		${sessionScope.jMessage}
 	</c:if>
 	<!-- 이렇게하면 파라미터에 아이디 비밀번호가 뜨고
 	getParameter 해서 그걸 session에 저장시키고

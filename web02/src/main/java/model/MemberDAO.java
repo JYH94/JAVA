@@ -82,7 +82,7 @@ public class MemberDAO {
 
 	// ** insert
 	public int insert(MemberDTO dto) {
-		sql = "insert into student(id,password,name,age,jno,info,point,birthday,rid) values(?,?,?,?,?,?,?,?,?)";
+		sql = "insert into member(id,password,name,age,jno,info,point,birthday,rid) values(?,?,?,?,?,?,?,?,?)";
 		try {
 			pst = cn.prepareStatement(sql);
 			pst.setString(1, dto.getId());
@@ -94,7 +94,6 @@ public class MemberDAO {
 			pst.setDouble(7, dto.getPoint());
 			pst.setString(8, dto.getBirthday());
 			pst.setString(9, dto.getRid());
-			
 			return pst.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("** insert Exception => " + e.toString());

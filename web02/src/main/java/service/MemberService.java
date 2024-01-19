@@ -11,7 +11,6 @@ public class MemberService {
 	
 	// ** selectList
 		public List<MemberDTO> selectList() {
-			System.out.println("서비스");
 			return dao.selectList();
 		}
 		

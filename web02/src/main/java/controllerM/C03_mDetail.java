@@ -23,14 +23,21 @@ public class C03_mDetail extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("UTF-8");
+		
+		
+		
 		String id = (String) request.getSession().getAttribute("loginId");
 		String url = "member/memberDetail.jsp";
+		if("U".equals(request.getParameter("jCode"))) {
+			url="member/updateForm.jsp";
+		}
 		
 		MemberService ms = new MemberService();
 		MemberDTO dto = ms.selectOne(id);
 		request.setAttribute("apple", dto);
 		
-		
+		response.setCharacterEncoding("UTF-8");
 		request.getRequestDispatcher(url).forward(request, response);
 		
 		
