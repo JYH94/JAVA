@@ -39,6 +39,7 @@ public class LoginForm extends HttpServlet {
 		check = ms.selectOne(request.getParameter("id"));
 		
 		String url = "home.jsp";
+		
 		if (check != null && check.getPassword().equals(request.getParameter("password"))) {
 			request.getSession().setAttribute("loginId", request.getParameter("id"));
 			request.getSession().setAttribute("loginPw", request.getParameter("password"));

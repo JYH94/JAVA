@@ -45,11 +45,20 @@
 			<a href="/web02/C03_mDetail?jCode=U">내정보수정</a>
 			<a href="/web02/logout">Logout</a>
 			<a href="/web02/member/delete.jsp">회원탈퇴</a>
+			<!-- <a href="/web02/rdelete" onclick="return test()">회원탈퇴</a>  -->
 			<br>&nbsp;  
 	<%	} %>
 	<c:if test="${requestScope.dMessage != null }">
 		<h3>회원탈퇴 성공 재가입하세요.</h3>
 	</c:if>
 	<a href="/web02/mlist">MList</a>
+	
+	
+	<!-- <script type="text/javascript">
+		function test() {
+			return confirm("테스트");
+			
+		}
+	</script> -->
 </body>
 </html>

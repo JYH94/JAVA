@@ -35,8 +35,8 @@
     <fullyQualifiedTypeName name="model.MemberDAO"/>
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
     <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
-    <fullyQualifiedTypeName name="domain.MemberDTO"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="java.lang.Double"/>
     <fullyQualifiedTypeName name="service.MemberService"/>
+    <fullyQualifiedTypeName name="domain.MemberDTO"/>
 </qualifiedTypeNameHistroy>
