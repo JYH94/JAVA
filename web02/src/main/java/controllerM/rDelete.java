@@ -35,8 +35,7 @@ public class rDelete extends HttpServlet {
 			request.setAttribute("dMessage", "탈퇴실패 비밀번호 오류");
 			request.getRequestDispatcher("member/delete.jsp").forward(request, response);
 		}
-		
-		
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

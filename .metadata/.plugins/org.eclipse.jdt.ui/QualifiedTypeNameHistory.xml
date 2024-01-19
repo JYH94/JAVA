@@ -24,7 +24,6 @@
     <fullyQualifiedTypeName name="javax.servlet.ServletConfig"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
-    <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="mvcTest.StudentDAO"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="mvcTest.StudentService"/>
@@ -36,6 +35,8 @@
     <fullyQualifiedTypeName name="model.MemberDAO"/>
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
     <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
-    <fullyQualifiedTypeName name="service.MemberService"/>
     <fullyQualifiedTypeName name="domain.MemberDTO"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="java.lang.Double"/>
+    <fullyQualifiedTypeName name="service.MemberService"/>
 </qualifiedTypeNameHistroy>

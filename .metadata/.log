@@ -3785,3 +3785,15 @@ java.lang.InterruptedException
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-19 17:28:36.930
 !MESSAGE executing callback sts4.classpath.ppieidlN SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-19 18:17:51.638
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.ppieidlN
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-19 18:17:51.639
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.ppieidlN
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-19 18:17:51.639
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-19 18:17:51.639
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.ppieidlN => OK
