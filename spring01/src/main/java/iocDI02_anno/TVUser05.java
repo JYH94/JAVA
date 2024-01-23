@@ -107,6 +107,9 @@ public class TVUser05 {
 		// 2. 필요한 객체를 전달받고 서비스 실행
 		// => 어노테이션 없다면 : NoSuchBeanDefinitionException 발생
 		// => 어노테이션 중복시 : ConflictingBeanDefinitionException 발생
+		// => 어노테이션(컴포넌트)를 지정해주면 객체 생성 자체는 무조건 되고,
+		//    그 후에 해당하는 어노테이션 id를 찾게된다.
+		//    매칭되는 id가 없다해도 생성자체는 되는 모습을 볼 수 있다.
 		TV tv = (TV) sc.getBean("tv");
 		if (tv != null) {
 			tv.powerOn();
