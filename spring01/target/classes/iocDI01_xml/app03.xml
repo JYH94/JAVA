@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	
+	
+<!-- ** 1) 고전적 방법 (직접 new : 소스 재컴파일) ** -->
+	<!-- 기본생성자 호출 -->
+	<bean id="sstv" class="iocDI01_xml.SsTVs" lazy-init="true"/>
+	
+	
+	
+	
+<!-- ** 2) IOC/DI -> 생성자 주입 ** 
+	=> 인자의 종류와 동일한(Type, Name, 갯수) 생성자 호출
+	=> 인자 매칭방법으로 name , index(0부터) 속성을 사용한다.
+-->
+	<bean id="lgtv" class="iocDI01_xml.LgTVs" lazy-init="true">
+		<constructor-arg index="1" value="Gold"/>
+		<constructor-arg index="2" value="1234500"/>
+		<constructor-arg index="0" ref="sp" />
+		<!-- 객체를 매개변수로 전달해주는 경우 참조값을 전달해줘야 하기 때문에 
+		value 말고 ref 속성 사용 -->
+		
+<!-- 	<constructor-arg name="color" value="Gold"/>
+		<constructor-arg name="price" value="1234500"/>
+		<constructor-arg name="speaker" ref="sp" /> -->
+		<!-- constructor-arg 태그를 통해 매개변수 전달 하는 모습 -->
+	</bean>
+	<bean id="sp" class="iocDI01_xml.Speaker" lazy-init="true" />
+	
+<!-- 3) IOC/DI -> setter 주입 
+   => setter 메서드는 <bean> 생성 직후 컨테이너가 자동 호출
+   => 매개변수1개, 2개, 3개 모두 Test
+   => setter 찾는 규칙 ( setPrice )  
+      -> name에 지정된 값으로 setter메서드명 setSpeaker, setColor 를 찾기때문에
+           setter 메서드명과 변수명을 일치시켜야함. 
+           ( 그러므로 index는 사용불가 )
+-->   
+	
+	<bean id="aitv" class="iocDI01_xml.AiTVs" lazy-init="true">
+		<property name="speaker" ref="sp" />
+		<property name="color" value="Silver"/>
+		<property name="price" value="789000"/>
+	</bean>
+</beans>

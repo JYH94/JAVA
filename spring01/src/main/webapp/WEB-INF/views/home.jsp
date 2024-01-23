@@ -20,9 +20,11 @@
 			<h3>로그인을 해주세요.</h3>
 		</c:otherwise>
 	</c:choose>
-	<c:if test="${!empty requestScope.message}">
-		<hr><h4>${requestScope.message}</h4>
+	
+	<c:if test="${requestScope.nMessage != null}">
+		<hr><h4>${requestScope.nMessage}</h4>
 	</c:if>
+	
 	<hr>
 	<img alt="" src="resources/images/a1.png" width="400" height="300">
 	<hr>
@@ -43,6 +45,7 @@
 	
 	&nbsp;<a href = "mlist">MList</a>&nbsp;
 	&nbsp;<a href = "mdetail">MDetail</a>&nbsp;
+	<br>
 	&nbsp;<a href = "mlistsp">MListSp</a>&nbsp;
 	&nbsp;<a href = "mdetailsp">MDetailSp</a>&nbsp;
 </body>

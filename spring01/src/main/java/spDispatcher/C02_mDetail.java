@@ -15,7 +15,7 @@ public class C02_mDetail implements Controller{
 		MemberService service = new MemberService();
 		ModelAndView mv = new ModelAndView();
 
-		mv.addObject("dto", service.selectOne("img4029") );
+		mv.addObject("dto", service.selectOne("test") );
 		mv.setViewName("member/memberDetail");
 		return mv;
 	}

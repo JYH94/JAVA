@@ -17,6 +17,7 @@ public class MyHandlerMapping {
 	
 	// 3) 내부에서 인스턴스 생성 & 제공 (싱글톤 패턴)
 	private static MyHandlerMapping instance = new MyHandlerMapping(); //공급할 객체 생성
+	
 	public static MyHandlerMapping getInstance() { return instance; } //getter 를 통해 공급할 객체에 접근
 	
 	// 4) Dispatcher_Servlet (FrontController) 의 요청에 대한

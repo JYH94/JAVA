@@ -130,7 +130,8 @@
 			<scope>test</scope>
 		</dependency> 
 		
-		<!-- MySql : https://mvnrepository.com/artifact/mysql/mysql-connector-java -->   
+		<!-- MySql : https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		   
 		<dependency>
     		<groupId>mysql</groupId>
     		<artifactId>mysql-connector-java</artifactId>
@@ -159,8 +160,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.5.1</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source> <!-- 자바버전 변경 -->
+                    <target>1.8</target>
                     <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>

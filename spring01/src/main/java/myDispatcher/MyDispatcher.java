@@ -32,6 +32,7 @@ public class MyDispatcher extends HttpServlet {
 		// 1) 요청 분석
 		// => url 분석후 요청명 확인
 		// => 한글처리
+		System.out.println("테스트");
 		request.setCharacterEncoding("UTF-8");
 		String uri = request.getRequestURI().substring(request.getRequestURI().lastIndexOf("/"));	
 						
@@ -39,11 +40,11 @@ public class MyDispatcher extends HttpServlet {
 		// => MyHandlerMapping 에 요청, 해당 서비스컨트롤러의 인스턴스
 		// => 해당 서비스 실행				
 		MyController controller = hmappings.getController(uri);
-		if( controller != null) {
+		if( controller != null ) {
 			uri = controller.handleRequest(request, response);
 		} else {
 			uri = "home";
-			request.setAttribute("message", "~~ 없는 요청 입니다. ~~");
+			request.setAttribute("nMessage", "~~ 없는 요청 입니다. ~~");
 		}
 		
 				
