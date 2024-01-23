@@ -1,6 +1,8 @@
 package controllerM;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,6 +55,8 @@ public class rDelete extends HttpServlet {
 			request.setAttribute("dMessage", "탈퇴실패 비밀번호 오류");
 			request.getRequestDispatcher("member/delete.jsp").forward(request, response);
 		}
+		
+		
 		
 		
 

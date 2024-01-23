@@ -34,9 +34,23 @@
     <fullyQualifiedTypeName name="com.sun.source.tree.DoWhileLoopTree"/>
     <fullyQualifiedTypeName name="model.MemberDAO"/>
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
+    <fullyQualifiedTypeName name="org.graalvm.compiler.nodes.extended.MembarNode"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
+    <fullyQualifiedTypeName name="controllerF.Ex04_Controller"/>
+    <fullyQualifiedTypeName name="domain.MemberDTO"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="java.lang.Double"/>
+    <fullyQualifiedTypeName name="java.util.logging.Handler"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletResponse"/>
+    <fullyQualifiedTypeName name="java.util.Map"/>
+    <fullyQualifiedTypeName name="myDispatcher.C01_mList"/>
+    <fullyQualifiedTypeName name="myDispatcher.MyHandlerMapping"/>
+    <fullyQualifiedTypeName name="myDispatcher.MyViewResolver"/>
+    <fullyQualifiedTypeName name="myDispatcher.MyController"/>
+    <fullyQualifiedTypeName name="org.springframework.web.servlet.ViewResolver"/>
     <fullyQualifiedTypeName name="service.MemberService"/>
-    <fullyQualifiedTypeName name="domain.MemberDTO"/>
+    <fullyQualifiedTypeName name="org.springframework.web.servlet.mvc.Controller"/>
+    <fullyQualifiedTypeName name="org.springframework.web.servlet.ModelAndView"/>
 </qualifiedTypeNameHistroy>

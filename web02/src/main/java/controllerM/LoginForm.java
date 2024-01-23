@@ -42,7 +42,7 @@ public class LoginForm extends HttpServlet {
 		
 		if (check != null && check.getPassword().equals(request.getParameter("password"))) {
 			request.getSession().setAttribute("loginId", request.getParameter("id"));
-			request.getSession().setAttribute("loginPw", request.getParameter("password"));
+//			request.getSession().setAttribute("loginPw", request.getParameter("password"));
 			
 			
 			response.sendRedirect(url);

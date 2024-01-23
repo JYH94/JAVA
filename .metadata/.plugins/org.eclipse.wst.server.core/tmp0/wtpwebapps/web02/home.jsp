@@ -11,15 +11,15 @@
 <body>
 	<h2>Dynamic Web Project</h2>
 	<c:choose>
-		<c:when test="${sessionScope.loginId != null }">
-			<h3>${sessionScope.loginId}님 안녕하세요</h3>
+		<c:when test="${sessionScope.loginName != null }">
+			<h3>${sessionScope.loginName}님 안녕하세요</h3>
 		</c:when>
 		<c:otherwise>
 			<h3>로그인 후 이용하세요</h3>
 		</c:otherwise>
 	</c:choose>
 
-	<img alt="" src="images/letsgo.png" width="300" height="200">
+	<img alt="" src="web02/images/tulips.png" width="300" height="200">
 	<hr>
 
 <%-- 	<c:choose>
@@ -48,11 +48,11 @@
 			<!-- <a href="/web02/rdelete" onclick="return test()">회원탈퇴</a>  -->
 			<br>&nbsp;  
 	<%	} %>
+	<a href="/web02/mlist">MList</a>
+	
 	<c:if test="${requestScope.dMessage != null }">
 		<h3>회원탈퇴 성공 재가입하세요.</h3>
 	</c:if>
-	<a href="/web02/mlist">MList</a>
-	
 	
 	<!-- <script type="text/javascript">
 		function test() {
@@ -60,5 +60,7 @@
 			
 		}
 	</script> -->
+	
+	
 </body>
 </html>

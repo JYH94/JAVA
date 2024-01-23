@@ -6,8 +6,10 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="service"/>
+		<item key="selection" value="java"/>
 		<list key="findhistory">
+			<item value="java"/>
+			<item value="javja"/>
 			<item value="ms"/>
 			<item value="StudentDTO"/>
 		</list>

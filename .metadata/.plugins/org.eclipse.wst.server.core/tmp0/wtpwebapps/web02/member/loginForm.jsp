@@ -10,7 +10,7 @@
 <body>
 	<form action="/web02/login" method="post">
 		아이디 <input type="text" name="id" id="id"/><br>
-		비밀번호 <input type="text" name="password" id="password"/><br>
+		비밀번호 <input type="password" name="password" id="password"/><br>
 		<input type="submit">
 		<input type="reset" value="취소"/>
 	</form>

@@ -11,7 +11,7 @@
 
 	<h3>** Update Form **</h3>
 <form action="/web02/mupdate" method="post">
-	<div>°
+	<div>
 		아이디
 		<input type="text" id="id" name="id" value="${requestScope.apple.id}" readonly/>
 		<!-- <input type="submit" value="중복검사"/><br> -->
