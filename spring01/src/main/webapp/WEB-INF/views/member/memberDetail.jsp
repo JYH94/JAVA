@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>** MyInfo **</title>
+<title>** Spring01_MVC2 MyInfo **</title>
 <style type="text/css">
 
 	tbody, tr {
@@ -41,7 +41,7 @@
 </style>
 </head>
 <body>
-	<h2>** MyInfo **</h2>
+	<h2>** Spring01_MVC2 MyInfo **</h2>
 	<table border=1>
 		<tr bgcolor="Aquamarine" style="font-weight: bold;">
 			<th>ID</th><th>Password</th><th>Name</th><th>Age</th><th>Jno</th>

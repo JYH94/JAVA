@@ -5,10 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>** Web02_MVC02 MemberList **</title>
+<title>** Spring01_MVC02 MemberList **</title>
 </head>
 <body>
-	<h2>** Web02_MVC02 MemberList **</h2>
+	<h2>** Spring01_MVC02 MemberList **</h2>
 	<hr>
 	<c:if test="${!empty requestScope.massage}">
 	=> ${requestScope.massage}	

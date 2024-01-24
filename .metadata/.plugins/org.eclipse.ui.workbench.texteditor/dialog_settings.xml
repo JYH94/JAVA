@@ -6,8 +6,10 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="java"/>
+		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value="annotation"/>
+			<item value="javax.annotation"/>
 			<item value="java"/>
 			<item value="javja"/>
 			<item value="ms"/>

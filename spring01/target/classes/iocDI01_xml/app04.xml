@@ -12,9 +12,9 @@
 
 	<!-- ** 2) IOC/DI -> 생성자 주입 ** -->
 	<bean id="lgtv" class="iocDI01_xml.LgTVsi" lazy-init="true">
+		<constructor-arg index="0" ref="spb" />
 		<constructor-arg index="1" value="Gold" />
 		<constructor-arg index="2" value="1234500" />
-		<constructor-arg index="0" ref="spb" />
 		
 		<!-- <constructor-arg name="color" value="Gold"/>
 			 <constructor-arg name="price" value="1234500"/> 

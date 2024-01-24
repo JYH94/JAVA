@@ -10,7 +10,6 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 
 interface Speakeri {
 	void volumeUp();
-
 	void volumeDown();
 } // Speakeri
 

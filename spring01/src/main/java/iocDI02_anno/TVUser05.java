@@ -28,6 +28,7 @@ import org.springframework.stereotype.Component;
 //=> ...NoSuchBeanDefinitionException: 
 //           No bean named 'tv' is defined ....
 //=> @ Test3 id명 중복되는 경우 (둘다 beanname  ("tv") 지정 )  
+//=> id는 프로젝트 전체! 에서 유일해야 한다.
 //=> ...annotation.ConflictingBeanDefinitionException: ....
 //  ...non-compatible bean definition of same name and class ...
 
@@ -42,7 +43,7 @@ interface TV {
 	void volumeDown();
 }
 
-@Component("tv")
+//@Component("tv")
 class SsTVi implements TV {
 
 	public SsTVi() {
@@ -68,7 +69,7 @@ class SsTVi implements TV {
 
 // 컴포넌트 붙여주면 시작과 동시에 객체 생성
 // 스프링 컨테이너처럼 객체를 생성해주는 모습이다.
-@Component("ltv")
+//@Component("ltv")
 class LgTVi implements TV {
 
 	public LgTVi() {
