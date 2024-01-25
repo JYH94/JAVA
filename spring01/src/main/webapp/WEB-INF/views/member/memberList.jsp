@@ -20,8 +20,8 @@
 			<th>Info</th><th>Point</th><th>Birthday</th><th>추천인</th>
 		</tr>
 		<c:choose>
-			<c:when test="${!empty requestScope.mList}">
-				<c:forEach var="s" items="${requestScope.mList}">
+			<c:when test="${!empty requestScope.banana}">
+				<c:forEach var="s" items="${requestScope.banana}">
 					<tr>
 						<td>${s.id}</td>
 						<td>${s.password}</td>
@@ -43,7 +43,7 @@
 		</c:choose>
 	</table>
 	<hr>
-	&nbsp;<a href="/web02/home.jsp">Home</a>&nbsp;
+	&nbsp;<a href="home">Home</a>&nbsp;
 	&nbsp;<a href="javascript:history.back();">이전으로</a>&nbsp;
 </body>
 </html>

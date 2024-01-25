@@ -13,13 +13,14 @@ public class C02_mDetail implements Controller{
 
 	@Autowired
 	MemberService service;
+	// IOC/DI 적용, 자동주입 -> 어딘가에서 이미 생성되어 있어야 한다(@ or xml or jc)
 	
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) {
 		
 		ModelAndView mv = new ModelAndView();
 
-		mv.addObject("dto", service.selectOne("test") );
+		mv.addObject("apple", service.selectOne("juh94") );
 		mv.setViewName("member/memberDetail");
 		return mv;
 	}

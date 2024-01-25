@@ -39,7 +39,9 @@
 			- 콜렉션의 Properties는 
 			  (String, String) 형태로 저장하는 Map보다 단순화된 컬렉션
 		-->		
-	<beans:bean
+		
+		
+<!-- 	<beans:bean
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<beans:property name="mappings">
 			<beans:props>
@@ -47,13 +49,15 @@
 				<beans:prop key="/mdetailsp">md</beans:prop>
 			</beans:props>
 		</beans:property>
-	</beans:bean>
+	</beans:bean> -->
+
+
 
 	<!-- 2. Controller Bean 등록 -->
-	<beans:bean class="spDispatcher.C01_mList" id="ml"
+<!-- 	<beans:bean class="spDispatcher.C01_mList" id="ml"
 		lazy-init="true" />
 	<beans:bean class="spDispatcher.C02_mDetail" id="md"
-		lazy-init="true" />
+		lazy-init="true" /> -->
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
