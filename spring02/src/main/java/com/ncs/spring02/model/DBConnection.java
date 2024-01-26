@@ -47,8 +47,6 @@ public class DBConnection {
 			System.out.println("** DB Connection Exception => " + e.toString());
 //			e.printStackTrace();
 			return null;
-		} finally {
-			
 		}
 		
 	} //getConnection

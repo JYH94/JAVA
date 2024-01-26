@@ -15,6 +15,7 @@ public class JoDTO {
 	private String project;
 	private String slogan;
 	
+	private String cname; // 필요시 사용
 	// 2) getter/setter
 	// 3) toString
 	// 롬복 라이브러리 사용으로 인해 오버라이딩 할 필요가 없어진다

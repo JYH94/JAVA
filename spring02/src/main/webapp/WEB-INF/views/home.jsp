@@ -13,21 +13,21 @@
 <P> * Home_time : ${serverTime} </P>
 <hr>
 
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <c:if test="${!empty sessionScope.loginName }">
 	<b>${sessionScope.loginName} 님 안녕하세요 ~~</b><br>
 </c:if>
-<c:if test="${!empty sessionScope.dMessage}">
-	<hr>=> ${sessionScope.dMessage}<br>
-</c:if>
-<c:if test="${empty sessionScope.loginName}">
+<c:if test="${empty sessionScope.loginId}">
 	<b>로그인 후 이용하세요 ~~</b><br>
+	<c:if test="${!empty requestScope.dMessage}">
+		<hr>=> ${requestScope.dMessage}<br>
+	</c:if>
 </c:if>
-
-
-<c:if test="${!empty requestScope.Message}">
-	<hr>=> ${requestScope.Message}<br>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<c:if test="${!empty requestScope.message}">
+	<hr>=> ${requestScope.message}<br>
 </c:if>
-
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <hr>
 	<img alt="mainImage" src="/spring02/resources/images/tulips.png" width="300" height="200">
 <hr>
@@ -42,13 +42,22 @@
 </c:if>
 <!-- ============= Login 후 ============= -->
 <c:if test="${!empty sessionScope.loginId }">
-	&nbsp;<a href = "member/detail?jCode=">내정보</a>&nbsp;
+	&nbsp;<a href = "member/detail?jCode=D">내정보</a>&nbsp;
 	&nbsp;<a href = "member/detail?jCode=U">내정보수정</a>&nbsp;
 	&nbsp;<a href = "member/logout">Logout</a>&nbsp;
 	&nbsp;<a href = "member/delete">탈퇴</a>&nbsp;
 </c:if>
 <br><hr>
 	&nbsp;<a href = "member/memberList">MList</a>&nbsp;
+	<br>
+	&nbsp;<a href = "jo/joList">JList</a>&nbsp;
+	&nbsp;<a href = "jo/joInsert">조 추가</a>&nbsp;
+
+<br><br>
+<c:if test="${!empty requestScope.dMessage }">
+	${requestScope.dMessage}
+</c:if>
+	
 	
 	
 	<br><br>

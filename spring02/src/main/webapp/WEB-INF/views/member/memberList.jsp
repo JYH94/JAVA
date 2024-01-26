@@ -43,8 +43,10 @@
 		</c:choose>
 	</table>
 	<hr>
-	&nbsp;<a href="home">Home</a>&nbsp;
-	&nbsp;<a href ="detail">내정보</a>&nbsp;
+	&nbsp;<a href="/spring02/home">Home</a>&nbsp;
+	<c:if test="${!empty sessionScope.loginId }">
+		&nbsp;<a href ="detail?jCode=">내정보</a>&nbsp;
+	</c:if>
 	&nbsp;<a href="javascript:history.back();">이전으로</a>&nbsp;
 </body>
 </html>
