@@ -58,9 +58,7 @@
 	${requestScope.dMessage}
 </c:if>
 	
-	
-	
 	<br><br>
-
+	&nbsp;<a href = "board/boardList">BList</a>&nbsp;
 </body>
 </html>

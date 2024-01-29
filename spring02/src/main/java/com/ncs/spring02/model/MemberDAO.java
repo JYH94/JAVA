@@ -60,6 +60,78 @@ public class MemberDAO {
 			return null;
 		}
 	} // selectList
+	
+	public List<MemberDTO> selectList(int jno) {
+		sql = "select * from member where jno = ?";
+		List<MemberDTO> list = new ArrayList<MemberDTO>();
+
+		try {
+			pst = cn.prepareStatement(sql);
+			pst.setInt(1, jno);
+			rs = pst.executeQuery(); 
+			// => 결과의 존재여부 
+			if (rs.next()) {
+				do {
+					// => setter 사용
+					MemberDTO dto = new MemberDTO();
+					dto.setId(rs.getString(1));
+					dto.setPassword(rs.getString(2));
+					dto.setName(rs.getString(3));
+					dto.setAge(rs.getInt(4));
+					dto.setJno(rs.getInt(5));
+					dto.setInfo(rs.getString(6));
+					dto.setPoint(rs.getDouble(7));
+					dto.setBirthday(rs.getString(8));
+					dto.setRid(rs.getString(9));
+
+					list.add(dto);
+				} while (rs.next());
+				return list;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			System.out.println("** selectList Exception => " + e.toString());
+			return null;
+		}
+	} // selectList
+	
+	
+	
+	public List<MemberDTO> selectJoList(int jno) {
+		sql = "select * from member where jno = ?";
+		List<MemberDTO> list = new ArrayList<MemberDTO>();
+
+		try {
+			pst = cn.prepareStatement(sql);
+			pst.setInt(1, jno);
+			rs = pst.executeQuery(); 
+			// => 결과의 존재여부 
+			if (rs.next()) {
+				do {
+					// => setter 사용
+					MemberDTO dto = new MemberDTO();
+					dto.setId(rs.getString(1));
+					dto.setPassword(rs.getString(2));
+					dto.setName(rs.getString(3));
+					dto.setAge(rs.getInt(4));
+					dto.setJno(rs.getInt(5));
+					dto.setInfo(rs.getString(6));
+					dto.setPoint(rs.getDouble(7));
+					dto.setBirthday(rs.getString(8));
+					dto.setRid(rs.getString(9));
+
+					list.add(dto);
+				} while (rs.next());
+				return list;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			System.out.println("** selectList Exception => " + e.toString());
+			return null;
+		}
+	} 
 
 	// ** selectOne 
 	// => 기본자료형 매개변수 _ Call By Value

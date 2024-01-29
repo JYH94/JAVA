@@ -4,3 +4,10 @@
 => jsp : joList.jsp , joDetail.jsp, joInsert.jsp , joUpdate.jsp
 => home : 메뉴 추가 <a href = "jo/joList">JList</a>
 => joList 에서 jno를 클릭하면 joDetail 출력
+=
+** 기능 추가
+=> joDetail 에 조원 목록 출력하기
+	-> JoController의 Detail 메서드에 기능 추가 
+		조원 목록 읽어오기(MemberDAO 조원 설렉 추가(selectJoList 추가) ) or 오버로딩 방법 사용
+		-> Service에도 추가(마찬가지로 오버로딩)
+	-> joDetail.jsp 에 출력구문 추가

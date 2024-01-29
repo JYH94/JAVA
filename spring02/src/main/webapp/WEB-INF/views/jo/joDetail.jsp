@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>** JoDetail</title>
 <link rel="stylesheet" type="text/css" 
 		href="/spring02/resources/myLib/myStyle.css" >
 </head>
@@ -15,7 +15,7 @@
 	}
 </style>
 <body>
-<h2>** 조 상세정보 **</h2>
+<h1>** 조 상세정보 **</h1>
 	<table border=1 style="width:90%; margin:0 auto;">
 		<tr>
 			<th>Jno</th>
@@ -34,10 +34,72 @@
 	</table>
 	
 	<br>
+	<hr>
 	<br>
-	<c:if test="${!empty requestScope.jmessage } }">
+
+	
+	<%-- <c:if test="${!empty requestScope.test }">
+		<table border=1 style="width:90%; margin:0 auto;">
+			<tr>
+				<th>id</th>
+				<th>password</th>
+				<th>name</th>
+				<th>age</th>
+				<th>jno</th>
+				<th>info</th>
+				<th>point</th>
+				<th>birthday</th>
+				<th>rid</th>
+			</tr>
+			<c:forEach items="${requestScope.test }" var="list">
+				<tr>
+					<td>${list.id }</td>
+					<td>${list.password }</td>
+					<td>${list.name }</td>
+					<td>${list.age }</td>
+					<td>${list.jno }</td>
+					<td>${list.info }</td>
+					<td>${list.point }</td>
+					<td>${list.birthday }</td>
+					<td>${list.rid }</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</c:if> --%>
+	<h1>** 조원 목록 **</h1>
+	<c:if test="${!empty requestScope.test2 }">
+		<table border=1 style="width:90%; margin:0 auto;">
+			<tr>
+				<th>id</th>
+				<th>password</th>
+				<th>name</th>
+				<th>age</th>
+				<th>jno</th>
+				<th>info</th>
+				<th>point</th>
+				<th>birthday</th>
+				<th>rid</th>
+			</tr>
+			<c:forEach items="${requestScope.test2 }" var="list">
+				<tr>
+					<td>${list.id }</td>
+					<td>${list.password }</td>
+					<td>${list.name }</td>
+					<td>${list.age }</td>
+					<td>${list.jno }</td>
+					<td>${list.info }</td>
+					<td>${list.point }</td>
+					<td>${list.birthday }</td>
+					<td>${list.rid }</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</c:if>
+	<hr>
+		<c:if test="${!empty requestScope.jmessage } }">
 		${requestScope.jmessage }
 	</c:if>
+	<hr>
 	
 	<a href="/spring02/home">Home</a><br>
 	<a href="javascript:history.back(-1);">이전으로</a><br>

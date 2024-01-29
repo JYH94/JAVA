@@ -22,7 +22,7 @@ public class JoDAO {
 	
 	public List<JoDTO> selectList() {
 		sql = "SELECT J.jno, jname, J.captain, name, project, slogan\r\n"
-				+ "FROM member M RIGHT JOIN jo J ON M.id = J.captain";
+				+ "FROM member M RIGHT OUTER JOIN jo J ON M.id = J.captain";
 		List<JoDTO> list = new ArrayList<JoDTO>();
 
 		try {

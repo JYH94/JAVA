@@ -11,9 +11,9 @@
 </head>
 <body>
 <h2>** 조 수정하기 **</h2>
-<form action="update" method="post">
+<form action="joUpdate" method="post">
 <label for="jno">
-	조번호<input type=text name="jno" id="jno" value="${requestScope.apple.jno} 조" readonly>
+	조번호<input type=text name="jno" id="jno" value="${requestScope.apple.jno}" readonly placeholder="조">
 </label>
 <br>
 <label for="jname">
