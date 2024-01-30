@@ -17,5 +17,5 @@ public class BoardDTO {
 	private int cnt;
 	private int root;
 	private int step;
-	private int indent;
+	private int indent; 
 }

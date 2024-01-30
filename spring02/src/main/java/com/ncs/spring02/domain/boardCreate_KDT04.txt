@@ -74,3 +74,11 @@ insert into board values(
 => 내글인 경우에만 boardDetail 에 글수정 과 글삭제 메뉴 표시하여 수정 또는 삭제할 수 있도록 
 
 
+2.3 ) 조회수 증가
+=> sql :
+	-> 1번 방법 update board set cnt=cnt+1 where seq=?
+	-> 2번 방법 Java code에서 cnt+1 을 전달한다면 dto.setCnt(dto.getCnt()+1) 도 가능하다
+	   cnt 증가시켜줬으면 service.update(dto) 를 통해 최신화 시켜주면 된다.
+=> 조건 : 글쓴이와 글보는이가 다른경우
+=> 어디서? : detail 페이지에서
+

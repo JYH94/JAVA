@@ -116,13 +116,13 @@ public class BoardDAO {
 
 	// ** Update
 	public int update(BoardDTO dto) {
-		sql = "update board set title =?, content=? where seq = ?";
+		sql = "update board set title =?, content=?, cnt=? where seq = ?";
 		try {
 			pst = cn.prepareStatement(sql);
 			pst.setString(1, dto.getTitle());
 			pst.setString(2, dto.getContent());
-			pst.setInt(3, dto.getSeq());
-			System.out.println(dto.getSeq());
+			pst.setInt(3, dto.getCnt());
+			pst.setInt(4, dto.getSeq());
 			
 			return pst.executeUpdate();
 			
@@ -134,9 +134,8 @@ public class BoardDAO {
 	}
 
 	// ** Delete
-	
 	public int delete(int seq) {
-		sql = "delete from member where seq=?";
+		sql = "delete from board where seq=?";
 		try {
 			pst = cn.prepareStatement(sql);
 			pst.setInt(1, seq);
@@ -147,4 +146,26 @@ public class BoardDAO {
 			return 0;
 		}
 	} // delete
+	
+    public int rinsert(BoardDTO dto) {
+        sql = "Insert Into board(seq,id,title,content,root,step,indent) values("
+                +"(select * from (select IFNULL(max(seq),0)+1 from board) as temp)"
+                + ",?,?,?,?,?,?)";
+                
+        try {
+            pst = cn.prepareStatement(sql);
+            pst.setString(1, dto.getId());
+            pst.setString(2, dto.getTitle());
+            pst.setString(3, dto.getContent());
+            pst.setInt(4, dto.getRoot());
+            pst.setInt(5, dto.getStep());
+            pst.setInt(6, dto.getIndent());
+            pst.executeUpdate();    //답글 등록 성공-> stepUpdate
+            System.out.println("**stepUpdate Count => " + stepUpdate(dto));
+            
+            return 1;
+        } catch (Exception e) {
+            System.out.println("** ReplyInsert Exception =>"+ e.toString());
+            return 0;
+        }
 } // class

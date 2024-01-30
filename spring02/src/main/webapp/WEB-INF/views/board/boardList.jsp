@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>** Spring MVC2 BoardList **</title>
+	<link rel="stylesheet" type="text/css" 
+		href="/spring02/resources/myLib/myStyle.css" >
 </head>
 <body>
 	<h2>** Spring MVC2 BoardList **</h2>
@@ -19,13 +21,15 @@
 			<th>조회수</th>
 		</tr>
 		<c:if test="${!empty sessionScope.loginId }">
-		<form action="delete" method="get">
 			<c:forEach var="s" items="${requestScope.banana}">
 				<tr>
 					<td>${s.seq}</td>
 						<td>
-						<a href="detail?jCode=U&seq=${s.seq}">
+						<a href="detail?&seq=${s.seq}
+						&cnt=${s.cnt}
+						&check=${sessionScope.loginId != s.id?'O':'X'}">
 							${s.title}
+							
 						</a>
 						</td>
 					<c:if test="${empty sessionScope.loginId }">
@@ -35,14 +39,13 @@
 					<td>${s.regdate}</td>
 					<td>${s.cnt}</td>
 					<c:if test="${s.id == sessionScope.loginId }">
-						<td><input type="submit" value="삭제"></td>
+						<td><a href="delete?seq=${s.seq}">삭제</a></td>
 					</c:if>
 					<c:if test="${s.id != sessionScope.loginId }">
 						<td>~~</td>
 					</c:if>
 				</tr>
 			</c:forEach>
-		</form>
 		</c:if>
 		<c:if test="${empty sessionScope.loginId }">
 			<h1>로그인 하지 않으면 게시판 못봐</h1>

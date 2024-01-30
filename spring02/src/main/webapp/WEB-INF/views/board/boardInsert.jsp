@@ -16,13 +16,13 @@
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td><input type="text" name="content"></td>
+			<td><textarea rows="20px" cols="20px" name="content"></textarea></td>
 		</tr>
 		<tr>
-			<th>id</th>
-			<td><input type="text" name="id" value="${sessionScope.loginId }" readonly></td>
+			<td><input type="hidden" name="id" value="${sessionScope.loginId }" readonly></td>
 		</tr>
 	</table>
+	
 	<input type="submit">
 	</form>
 	

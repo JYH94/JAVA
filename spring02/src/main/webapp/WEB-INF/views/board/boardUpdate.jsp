@@ -26,34 +26,14 @@
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td><input type=text name="content" value="${requestScope.apple.content}" readonly></td>
+			<td><input type=text name="content" value="${requestScope.apple.content}" ></td>
 		</tr>
+		
 	</table>
 		<button>수정</button>
-		
-		<c:if test="${requestScope.message != null }">
-			${requestScope.message }
-		</c:if>
-	</c:if>
-	
-	
-	<c:if test="${sessionScope.loginId != requestScope.apple.id }">
-		<table border=1>
-		<tr>
-			<th>id</th>
-			<td><input type=text value="${requestScope.apple.id}" readonly></td>
-		</tr>
-		<tr>
-			<th>title</th>
-			<td><input type=text value="${requestScope.apple.title}" readonly ></td>
-		</tr>
-		<tr>
-			<th>내용</th>
-			<td><input type=text value="${requestScope.apple.content}" readonly></td>
-		</tr>
-	</table>
 	&nbsp;<a href="javascript:history.back(-1);">이전으로</a>&nbsp;
 	</c:if>
+	
 	
 </form>
 </body>
