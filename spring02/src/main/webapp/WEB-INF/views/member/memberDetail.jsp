@@ -1,75 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>** Spring01_MVC2 MyInfo **</title>
-<style type="text/css">
-
-	tbody, tr {
-		display: flex;
-	}
-	tr {
-		flex-direction: column;
-	}
-	th,td {
-		
-		height: 40px;
-		display:flex;
-		align-items: center;
-	}
-	th {
-		width: 10vw;
-		justify-content: center;
-		text-align: center;
-	}
-	td {
-		width: 40vw;
-		padding-left: 10px;
-	}
-	input {
-		border: none;
-		height: 30px;
-		font-size: 18px;
-		width: 37vw;
-	}
-	input:focus {
-		outline:none;
-	}
-</style>
+	<meta charset="UTF-8">
+	<title>** Spring_MVC2 Member Detail **</title>
+	<link rel="stylesheet" type="text/css" 
+		  href="/spring02/resources/myLib/myStyle.css">
 </head>
 <body>
-	<h2>** Spring01_MVC2 MyInfo **</h2>
-	<table border=1>
-		<tr bgcolor="Aquamarine" style="font-weight: bold;">
-			<th>ID</th><th>Password</th><th>Name</th><th>Age</th><th>Jno</th>
-			<th>Info</th><th>Point</th><th>Birthday</th><th>추천인</th>
-		</tr>
-		<c:choose>
-			<c:when test="${!empty requestScope.apple}">
-				<tr>
-					<td>${apple.id}</td><td>${apple.password}</td>
-					<td>${apple.name}</td><td>${apple.age}</td>
-					<td>${apple.jno}</td><td>${apple.info}</td>
-					<td>${apple.point}</td><td>${apple.birthday}</td>
-					<td>${apple.rid}</td>
-				</tr>
-			</c:when>
-			<c:otherwise>
-				<tr>
-					<td colspan="9">MyInfo 결과가 1건도 없음
-				</tr>
-			</c:otherwise>
-		</c:choose>
-	</table>
-	
-	<c:if test="${!empty requestScope.message }">
-		<h1>${requestScope.message }</h1>
-	</c:if>
-	<hr>
-	&nbsp;<a href="/spring02/home">Home</a>&nbsp;
-	&nbsp;<a href="javascript:history.back();">이전으로</a>&nbsp;\
+<h2>** Spring_MVC2 Member Detail **</h2>
+<table>
+<c:if test="${not empty requestScope.apple}">
+	<tr height="40"><th bgcolor="Violet">I D</thj>
+		<td>${requestScope.apple.id}</td></tr>
+	<tr height="40"><th bgcolor="Violet">Password</th>
+		<td>${requestScope.apple.password}</td></tr>	
+	<tr height="40"><th bgcolor="Violet">Name</th>
+		<td>${requestScope.apple.name}</td></tr>
+	<tr height="40"><th bgcolor="Violet">Age</th>
+		<td>${requestScope.apple.age}</td></tr>
+	<tr height="40"><th bgcolor="Violet">Jno</th>
+		<td>${requestScope.apple.jno}</td></tr>
+	<tr height="40"><th bgcolor="Violet">Info</th>
+		<td>${requestScope.apple.info}</td></tr>
+	<tr height="40"><th bgcolor="Violet">Point</th>
+		<td>${requestScope.apple.point}</td></tr>
+	<tr height="40"><th bgcolor="Violet">Birthday</th>
+		<td>${requestScope.apple.birthday}</td></tr>
+	<tr height="40"><th bgcolor="Violet">추천인</th>
+		<td>${requestScope.apple.rid}</td></tr>									
+</c:if>
+<c:if test="${empty requestScope.apple}">
+	<tr><td colspan="2">~~ 출력할 자료가 없습니다 ~~</td></tr>
+</c:if>	
+</table>
+<hr>
+<c:if test="${!empty requestScope.message}">
+=> ${requestScope.message}<br>
+</c:if>
+<hr>
+&nbsp;<a href="javascript:history.go(-1)">이전으로</a>&nbsp;
+&nbsp;<a href="/spring02/home">Home</a>&nbsp;
 </body>
 </html>

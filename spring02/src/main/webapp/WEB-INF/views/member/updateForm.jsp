@@ -1,107 +1,76 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>     
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>** UpdateForm **</title>
-<style type="text/css">
-
-	tbody, tr {
-		display: flex;
-	}
-	tr {
-		flex-direction: column;
-	}
-	th,td {
-		
-		height: 40px;
-		display:flex;
-		align-items: center;
-	}
-	th {
-		width: 10vw;
-		justify-content: center;
-		text-align: center;
-	}
-	td {
-		width: 40vw;
-		padding-left: 10px;
-	}
-	input {
-		border: none;
-		height: 30px;
-		font-size: 18px;
-		width: 37vw;
-	}
-	input:focus {
-		outline:none;
-	}
-	div {
-		width: 50vw;
-		padding: 10px;
-		text-align: center;
-	}
-	div>input {
-		width: 20vw;
-	}
-	select {
-		width: 15vw;
-		height: 30px;
-		font-size: 18px;
-	}
-</style>
+	<meta charset="UTF-8">
+	<title>** Update Form **</title>
+	<link rel="stylesheet" type="text/css" 
+		    href="/spring02/resources/myLib/myStyle.css">
 </head>
 <body>
-<h2>** UpdateForm **</h2>
-<c:set value="${requestScope.apple}" var="dto"></c:set>
+<h2>** Spring MVC2 UpdateForm **</h2>
 <form action="update" method="post">
-	<table border=1>
-		<tr bgcolor="MediumOrchid" style="font-weight: bold;">
-			<th>ID</th><th>Password</th><th>Name</th><th>Age</th><th>Jno</th>
-			<th>Info</th><th>Point</th><th>Birthday</th><th>추천인</th>
-		</tr>
-		<c:choose>
-			<c:when test="${!empty dto}">
-				<tr>
-					<td><input readonly id="id" name="id" value="${apple.id}"></td>
-					<td><input type="password" id="password" name="password" value="${apple.password}"></td>
-					<td><input id="name" name="name" value="${apple.name}"></td>
-					<td><input id="age" name="age" value="${apple.age}"></td>
-					<td><select id="jno" name="jno">
-						<option value="1" ${apple.jno == 1 ? "selected":""}>1조:Business</option>
-						<option value="2" ${apple.jno == 2 ? "selected":""}>2조:static</option>
-						<option value="3" ${apple.jno == 3 ? "selected":""}>3조:칭찬해조</option>
-						<option value="4" ${apple.jno == 4 ? "selected":""}>4조:카톡으로얘기하조</option>
-						<option value="7" ${apple.jno == 7 ? "selected":""}>7조:칠면조(관리팀)</option>
-					</select></td>
-					<td><input id="info" name="info" value="${apple.info}"></td>
-					<td><input id="point" name="point" value="${apple.point}"></td>
-					<td><input id="birthday" name="birthday" value="${apple.birthday}"></td>
-					<td><input id="rid" name="rid" value="${apple.rid}"></td>
-				</tr>
-			</c:when>
-			<c:otherwise>
-				<tr>
-					<td colspan="9" style="text-align: center;">MyInfo 결과가 1건도 없음
-					</td>
-				</tr>
-			</c:otherwise>
-		</c:choose>
-	</table>
-	<div>
-		<input type="submit" value="수정">&nbsp;&nbsp;&nbsp;
-		<input type="reset" value="취소">
-	</div>
+<table>
+	<tr height="40">
+		<td bgcolor="DeepSkyBlue"><label for="id">I D</label></td>
+		<td><input type="text" name="id" id="id" value="${requestScope.apple.id}" readonly size="20"></td>
+				<!-- id: 화면출력, 서버로 전송, 수정은불가(즉, input Tag 의 입력 막기) 
+				 -> readonly: 서버로 전송 (권장)
+				 -> disabled: 서버로 전송되지않음
+				-->
+	</tr>
+	<tr height="40">
+		<td bgcolor="DeepSkyBlue"><label for="password">Password</label></td>
+		<td><input type="password" name="password" id="password" value="${requestScope.apple.password}" size="20"></td>
+	</tr>
+	<tr height="40">
+		<td bgcolor="DeepSkyBlue"><label for="name">Name</label></td>
+		<td><input type="text" name="name" id="name" value="${requestScope.apple.name}" size="20"></td>
+	</tr>
+	<tr height="40">
+		<td bgcolor="DeepSkyBlue"><label for="age">Age</label></td>
+		<td><input type="text" name="age" id="age" value="${requestScope.apple.age}" size="20"></td>
+	</tr>
+		<tr height="40">
+		<td bgcolor="DeepSkyBlue"><label for="jno">Jno</label></td>
+		<td><select name="jno" id="jno">
+				<option value="1" ${apple.jno==1 ? "selected":""}>1조: Business</option>
+				<option value="2" ${apple.jno==2 ? "selected":""}>2조: static</option>
+				<option value="3" ${apple.jno==3 ? "selected":""}>3조: 칭찬해조</option>
+				<option value="4" ${apple.jno==4 ? "selected":""}>4조: 카톡으로얘기하조</option>
+				<option value="7" ${apple.jno==7 ? "selected":""}>7조: 칠면조(관리팀)</option>
+			</select></td></tr>
+	<tr height="40">
+		<td bgcolor="DeepSkyBlue"><label for="info">Info</label></td>
+		<td><input type="text" name="info" id="info" value="${requestScope.apple.info}" size="20"></td>
+	</tr>
+	<tr height="40">
+		<td bgcolor="DeepSkyBlue"><label for="point">Point</label></td>
+		<td><input type="text" name="point" id="point" value="${requestScope.apple.point}" size="20"></td>
+	</tr>
+	<tr height="40">
+		<td bgcolor="DeepSkyBlue"><label for="birthday">Birthday</label></td>
+		<td><input type="date" name="birthday" id="birthday" value="${requestScope.apple.birthday}"></td>
+	</tr>
+		<tr height="40">
+		<td bgcolor="DeepSkyBlue"><label for="rid">추천인</label></td>
+		<td><input type="text" name="rid" id="rid" value="${requestScope.apple.rid}" size="20"></td>
+	</tr>
+	<tr><td></td>
+		<td><input type="submit" value="수정">&nbsp;&nbsp;
+			<input type="reset" value="취소">
+		</td>
+	</tr>
+</table>
 </form>
-<hr>
-<c:if test="${not empty requestScope.message}">
+<br><hr>
+<c:if test="${!empty requestScope.message}">
 => ${requestScope.message}<br>
 </c:if>
 <hr>
-	&nbsp;<a href="/spring02/home">Home</a>&nbsp;
-	&nbsp;<a href="javascript:history.back();">이전으로</a>&nbsp;
-<hr>
+&nbsp;<a href="/spring02/home">Home</a>&nbsp;
+&nbsp;<a href="javascript:history.go(-1)">이전으로</a>&nbsp;
 </body>
 </html>

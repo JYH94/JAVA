@@ -1,12 +1,13 @@
 package com.ncs.spring02.controller;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -15,120 +16,118 @@ import com.ncs.spring02.service.JoService;
 import com.ncs.spring02.service.MemberService;
 
 import lombok.AllArgsConstructor;
-@Controller 
-@RequestMapping(value = "/jo")
+
+@Controller
+@RequestMapping(value="/jo")
 @AllArgsConstructor
-// => 모든 멤버변수를 초기화하는 생성자 자동 추가 & 사용
-//	  그러므로 @Autowired 는 생략가능
+// => 모듬 맴버변수를 초기화하는 생성자 자동 추가 & 사용
+//    그러므로 아래의 @Autowired는 생략 가능
 public class JoController {
 	
-//	@Autowired(required = false)
-	JoService service;
-//	@Autowired(required = false)
-	MemberService mService;
+	//@Autowired
+	JoService service;	// = new JoService();
+	//@Autowired
+	MemberService mservice;
 	
-	@RequestMapping( value = {"/joInsert"}, method = RequestMethod.GET )
-	public void joinForm() { } //loginForm
-	
-	
-	@RequestMapping( value = {"/joList"}, method = RequestMethod.GET )
-	public void jolist(Model model) { 
+	// ** JoList
+	@GetMapping("/joList")
+	public void joList(Model model) {
 		model.addAttribute("banana", service.selectList());
-	} //mList
+	} //joList
 	
-	@RequestMapping( value = {"/joUpdate"}, method = RequestMethod.GET )
-	public void joUpdate(Model model, @RequestParam("jno")String jno) { 
-		model.addAttribute("apple", service.selectOne(Integer.parseInt(jno)));
-	} //mList
-	
-	@RequestMapping(value = "/detail", method = RequestMethod.GET)
-	public String detail(HttpSession session, Model model, 
-							@RequestParam("jno") int jno) {
-		// @RequestParam 들어온 요청이 detail?jno= ~ 이기 때문에
-		// 해당 요청의 파라미터를 매개변수로 받아올수있게 해주는 기능
+	// ** JoDetail
+	// => 아랫쪽에 조원목록 출력 (추가기능) -> joDetail.jap 에 Member_List 출력 코드 추가  
+	// => jo Table에서 selectOne  ->  apple 
+	// => member Table에서 조건검색 jno=#{jno} -> banana 
+	@GetMapping("/detail")
+	public String detail(HttpServletRequest request, Model model, 
+						JoDTO dto, @RequestParam("jCode") String jCode) {
 		
-	    // 1. 요청분석
-	    // => id: session 에서 꺼내오기
-	    // => detail 또는 수정 Page 출력을 위한 요청인지 jCode 로 구별 
-		String uri = "jo/joDetail"; // detail 기준
+		String uri = "jo/joDetail";
+		model.addAttribute("apple", service.selectOne(dto));
+		// => 수정요청시엔 수정폼으로 
+		if ( "U".equals(jCode) )
+			uri = "jo/joUpdate";
 		
-//		if("U".equals(request.getParameter("jno"))) {
-//			uri = "member/updateForm";
-//		}
-		// @RequestParam 을 이용하면 위 주석과 같은 조건을 걸어줄 필요가 없어진다.
+		// ** 조원목록 출력하기 추가 ( detail 출력시에만 )
+		// => MemberService 실행
+		//	-> selectJoList 메서드 추가 : service, DAO 
+		//	-> 실행결과는 banana 로 
 		
-		// 2. 서비스 & 결과 처리
-		model.addAttribute("apple" ,service.selectOne(jno));
-		model.addAttribute("test2" ,mService.selectList(jno));
-		// 오버로딩의 방법
+		//MemberService mservice = new MemberService(); 
+		// => java.lang.NullPointerException
+		//    스프링 컨텍스트의 관리하에 있지 않으므로 오류 
+		if ( "D".equals(jCode) )
+			
+			model.addAttribute("banana", mservice.selectJoList(dto.getJno()));
 		
-		model.addAttribute("test", mService.selectJoList(jno));
 		return uri;
-	} //Detail
+	} //detail
 	
-	@RequestMapping(value = "/joUpdate" ,method = RequestMethod.POST)
-	public String update(JoDTO dto , Model model) {
-		
-		String uri = "jo/joList";
-		model.addAttribute("apple",dto);
-		
-		if(service.update(dto) > 0) {
-			model.addAttribute("banana", service.selectList());
-			model.addAttribute("message","조 정보수정 성공 !!");
-		} else {
-			uri = "jo/joUpdateForm";
-			model.addAttribute("message","조 정보수정 오류 !! 다시하세요~");
-		}
-		return uri;
-	}
+	// ** Jo_Insert
+	// => joInsert 출력
+	@GetMapping(value="/joInsert")
+	public void joInsert() {
+		// viewName 생략
+	} //joInsert
 	
-	//** Delete
-	@RequestMapping(value = "/joDelete", method = RequestMethod.GET)
-	public String delete( HttpSession session, Model model, RedirectAttributes rttr, 
-							@RequestParam("jno") int jno) {
+	// => jo_insert 처리
+	@PostMapping(value="/insert")
+	public String insert(Model model, JoDTO dto, RedirectAttributes rttr) {
+		// ** Insert Service 처리
+		// => 성공: joList 로 redirect
+		// => 실패: 재입력 유도 -> insert 폼 요청
+		String uri="redirect:joList";
 		
-	    // 1. 요청분석
-	    // => id: session 에서 꺼내오기
-		// => 삭제 + session 처리도 해줘야 한다(invalidate)
-		// => 성공시 홈으로
-		String uri = "redirect:/home"; 
-		
-		// 2. 서비스 & 결과 처리
-		if(service.delete(jno) > 0 ) {
-			// 메세지 출력하고 싶지만 redirect 하면
-			// 모델 날라가고.. session에 저장시킨다면 사용 후에 해당 메세지를
-			// 삭제시키지 않으면 해당페이지에서 계속 출력되기 때문에 문제가 된다.
-			// = session에 저장 -> redirct 되어진 요청 처리시에
-			//	 request에 옮기고, session 속 메세지를 삭제해야한다.
-			// 위 번거로운 과정을 한번에 처리해주는 API = RedirectAttributes
-			rttr.addFlashAttribute("dMessage", "조 삭제 성공 ~");
-			session.invalidate();
-		} else {
-			rttr.addFlashAttribute("dMessage", "조 삭제 실패 ~");
-			// 마찬가지
+		if ( service.insert(dto)>0 ) {
+			rttr.addFlashAttribute("message", "~~ Jo_Insert 성공 ~~");
+		}else {
+			model.addAttribute("message", "~~ Jo_Insert 실패 , 다시 하세요 ~~");
+			uri="jo/joInsert";
 		}
 		
+		// 3) View 처리
 		return uri;
-	} //Detail
+	} //insert	
 	
-	@RequestMapping(value = "/joInsert", method = RequestMethod.POST)
-	public String insert(Model model, JoDTO dto ) { 
-		// 1. 요청분석
-		// => Spring 전 : 한글처리 , request 값 -> dto 에 set
-		// => Spring 후 : 한글은 filter 처리, request 처리는 매개변수로 자동화
+	// ** Update
+	@PostMapping(value="/update")
+	public String update(Model model, JoDTO dto, RedirectAttributes rttr) {
 		
-		String uri = "jo/joList"; // 성공시
+		// ** Update Service 처리
+		// => 성공: joList 로 redirect
+		// => 실패: 재수정 유도 -> joUpdate 폼으로
+		// => 그러므로 출력가능하도록 dto 를 setAttribute
+		model.addAttribute("apple", dto);
+		String uri="redirect:joList";
 		
-		if(service.insert(dto) > 0) {
-			model.addAttribute("banana", service.selectList());
-			model.addAttribute("jmessage", "조 추가 성공 !");
-		} else {
-			uri = "jo/joInsert";
-			model.addAttribute("jmessage", "조 추가 실패 !");
+		if ( service.update(dto)>0 ) {
+			// 수정성공 -> JList 로 redirect
+			rttr.addFlashAttribute("message", "~~ Jo 정보 수정 성공 ~~");
+		}else {
+			// 수정실패
+			model.addAttribute("message", "~~ Jo 정보 수정 실패 , 다시 하세요 ~~");
+			uri="jo/joUpdate";
 		}
 		
+		// 3) View 처리
 		return uri;
+	} //update
+	
+	// ** Delete
+	@GetMapping(value="/delete")
+	public String delete(JoDTO dto, RedirectAttributes rttr) {
 		
-		// 2. 서비스 & 결과 처리
-	} //join
-}
+		// ** Delete Service 처리
+		// => 성공, 실패 : joList 로 redirect
+		String uri="redirect:joList";
+		if ( service.delete(dto)>0 ) {
+			rttr.addFlashAttribute("message", "~~ Jo 삭제 성공 !!! ~~");
+		}else {
+			rttr.addFlashAttribute("message", "~~ Jo 삭제 실패 !!! ~~");
+		}
+		// 3) View 처리
+		return uri;
+	} //delete
+
+} //class

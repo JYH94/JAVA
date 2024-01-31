@@ -11,30 +11,28 @@ import org.springframework.stereotype.Repository;
 import com.ncs.spring02.domain.BoardDTO;
 
 // ** 게시판
-// => CRUD 구현
+// => CRUD구현
 
 @Repository
 public class BoardDAO {
-
+	
+	// ** 전역변수 정의
 	private static Connection cn = DBConnection.getConnection();
 	private static PreparedStatement pst;
 	private static ResultSet rs;
 	private static String sql;
-
+	
 	// ** selectList
 	public List<BoardDTO> selectList() {
-		sql = "select * from board order by seq desc";
-
+		sql="select * from board Order By root desc, step asc";
+		// => 답글달기 추가후 출력순서 수정
+		List<BoardDTO> list = new ArrayList<BoardDTO>();
 		try {
-
-			pst = cn.prepareStatement(sql);
-			rs = pst.executeQuery();
-
-			List<BoardDTO> list = new ArrayList<BoardDTO>();
+			pst=cn.prepareStatement(sql);
+			rs=pst.executeQuery();
 			if (rs.next()) {
 				do {
 					BoardDTO dto = new BoardDTO();
-
 					dto.setSeq(rs.getInt(1));
 					dto.setId(rs.getString(2));
 					dto.setTitle(rs.getString(3));
@@ -44,34 +42,28 @@ public class BoardDAO {
 					dto.setRoot(rs.getInt(7));
 					dto.setStep(rs.getInt(8));
 					dto.setIndent(rs.getInt(9));
-
 					list.add(dto);
-				} while (rs.next());
-
+				}while(rs.next());	
 				return list;
-			} else {
-				System.out.println("** Board selectList =>  출력자로가 없습니다");
+			}else {
+				System.out.println("** Board selectList => 출력자료가 없습니다 ");
 				return null;
-			} // if
-
-		} catch (Exception e) {
-			System.out.println("** Board selectList => " + e.toString());
+			}//if
+		}catch (Exception e) {
+			System.out.println("** Board selectList => "+e.toString());
 			return null;
-		} // try
-
-	} // selectList
-
+		} //try
+	} //selectList
+	
 	// ** selectOne
 	public BoardDTO selectOne(int seq) {
-		sql = "select * from board where seq = ?";
-
+		sql="select * from board where seq=?";
 		try {
-
-			pst = cn.prepareStatement(sql);
+			pst=cn.prepareStatement(sql);
 			pst.setInt(1, seq);
-			rs = pst.executeQuery();
-
+			rs=pst.executeQuery();
 			if (rs.next()) {
+				// => Data 존재: rs 을 dto에 담아서 return
 				BoardDTO dto = new BoardDTO();
 				dto.setSeq(rs.getInt(1));
 				dto.setId(rs.getString(2));
@@ -82,90 +74,127 @@ public class BoardDAO {
 				dto.setRoot(rs.getInt(7));
 				dto.setStep(rs.getInt(8));
 				dto.setIndent(rs.getInt(9));
-
 				return dto;
-			} else {
-				System.out.println("** Board selectOne =>  출력자로가 없습니다");
-				return null;
-			} // if
-
+			}else {
+				return null; 
+			}
 		} catch (Exception e) {
-			System.out.println("** Board selectOne => " + e.toString());
+			System.out.println("** Board selectOne Exception => "+e.toString());
 			return null;
-		} // try
+		}
 	}
-
-	// ** Insert
+	
+	// ** insert : 원글입력
+	// => 입력 컬럼: id, title, content 
+	//    default값: regdate, cnt, step, indent
+	// => root : seq 와 동일한 값	
+	// => Auto_Inc: seq (계산: auto 보다 IFNULL(max(seq)...) 를 적용)
 	public int insert(BoardDTO dto) {
-		sql = "insert into board(id, title, content) values(?,?,?)";
+		sql="insert into board(seq,id,title,content,root) values ("
+ 				+ " (select * from (select IFNULL(max(seq), 0)+1 from board) as temp)"  // seq값 계산
+ 				+ ",?,?,?, "
+ 				+ "(select * from (select IFNULL(max(seq), 0)+1 from board) as temp))"; 
+					// seq 와 동일한 root 값 
 		try {
-			pst = cn.prepareStatement(sql);
+			pst=cn.prepareStatement(sql);
 			pst.setString(1, dto.getId());
 			pst.setString(2, dto.getTitle());
 			pst.setString(3, dto.getContent());
-			
-			return pst.executeUpdate();
-			
+			return pst.executeUpdate(); // 처리갯수
 		} catch (Exception e) {
-			System.out.println("** Board insert =>  " + e.toString());
+			System.out.println("** Board_insert Exception => "+e.toString());
 			return 0;
 		}
-		
-		
 	}
-
-	// ** Update
-	public int update(BoardDTO dto) {
-		sql = "update board set title =?, content=?, cnt=? where seq = ?";
+	
+	// ** replyInsert : 답글입력
+	// => seq: IFNULL 이용
+	// => 입력 컬럼: id, title, content, root, step, indent
+	// => JDBC subQuery 구문 적용시 주의사항
+	//	  -> MySql: select 구문으로 한번더 씌워 주어야함 (insert 의 경우에도 동일)	
+	// => stepUpdate 가 필요함
+	//    댓글 입력 성공후 실행
+	//	  -> 현재 입력된 답글의 step 값은 수정되지 않도록 sql 구문의 조건 주의 	
+	// => boardList 의 출력순서 확인
+	//		~~~ order by root desc, step asc
+	public int rinsert(BoardDTO dto) {
+		sql="insert into board(seq,id,title,content,root,step,indent) values ("
+ 				+ " (select * from (select IFNULL(max(seq), 0)+1 from board) as temp)"  //seq값 계산
+ 				+ ",?,?,?,?,?,?)";
 		try {
-			pst = cn.prepareStatement(sql);
+			pst=cn.prepareStatement(sql);
+			pst.setString(1, dto.getId());
+			pst.setString(2, dto.getTitle());
+			pst.setString(3, dto.getContent());
+			pst.setInt(4, dto.getRoot());
+			pst.setInt(5, dto.getStep());
+			pst.setInt(6, dto.getIndent());
+			pst.executeUpdate(); // 답글등록 성공 -> stepUpdate
+			System.out.println("** stepUpdate Count => "+stepUpdate(dto));
+			return 1;
+		} catch (Exception e) {
+			System.out.println("** Reply_insert Exception => "+e.toString());
+			return 0;
+		}
+	} //rinsert
+	
+	// ** stepUpdate : step 값 증가
+	// => 조건
+	//	-> root 동일 and step >=  and 새글은 제외
+	public int stepUpdate(BoardDTO dto) {
+		sql = "update board set step=step+1 where root=? and step>=? "
+				+ "and seq <> (select * from (select IFNULL(max(seq), 0) from board) as temp)" ;
+		try {
+			pst=cn.prepareStatement(sql);
+			pst.setInt(1, dto.getRoot());
+			pst.setInt(2, dto.getStep());
+			return pst.executeUpdate(); // 수정된 Data 갯수 return
+		} catch (Exception e) {
+			System.out.println("** stepUpdate Exception => "+e.toString());
+			return 0;
+		}
+	} //stepUpdate
+	
+	// ** update
+	// => title, content 만 수정 
+	// => 추후 조회수 증가 추가
+	public int update(BoardDTO dto) {
+		sql="update board set title=?, content=?, cnt=? where seq=?";
+		try {
+			pst=cn.prepareStatement(sql);
 			pst.setString(1, dto.getTitle());
 			pst.setString(2, dto.getContent());
 			pst.setInt(3, dto.getCnt());
 			pst.setInt(4, dto.getSeq());
-			
-			return pst.executeUpdate();
-			
+			return  pst.executeUpdate(); // 처리갯수
 		} catch (Exception e) {
-			System.out.println("** Board update =>  " + e.toString());
+			System.out.println("** Board_update Exception => "+e.toString());
 			return 0;
+		}
+	}
+	
+	// ** Board Delete
+	// => seq로 삭제
+	// => 하지만 답글 추가 후 : 원글과 답글 구별해서 지워야 한다.
+	// -> 원글 : 원글 삭제시 답글도 지워져야 하기 때문에
+	// root 가 동일한 where root = ?(seq) 
+	// -> 답글 : 답글만 지우기 때문에 where seq = ?(seq)
+	public int delete(BoardDTO dto) {
+		
+		if(dto.getSeq() == dto.getRoot()) { // 원글 삭제의 경우
+			sql = "delete from board where root=?";
+		} else { // 답글삭제의 경우
+			sql="delete from board where seq=?";
 		}
 		
-	}
-
-	// ** Delete
-	public int delete(int seq) {
-		sql = "delete from board where seq=?";
 		try {
-			pst = cn.prepareStatement(sql);
-			pst.setInt(1, seq);
-			
+			pst=cn.prepareStatement(sql);
+			pst.setInt(1, dto.getSeq());
 			return pst.executeUpdate(); // 처리갯수
 		} catch (Exception e) {
-			System.out.println("** delete Exception => " + e.toString());
+			System.out.println("** Board_delete Exception => "+e.toString());
 			return 0;
 		}
-	} // delete
-	
-    public int rinsert(BoardDTO dto) {
-        sql = "Insert Into board(seq,id,title,content,root,step,indent) values("
-                +"(select * from (select IFNULL(max(seq),0)+1 from board) as temp)"
-                + ",?,?,?,?,?,?)";
-                
-        try {
-            pst = cn.prepareStatement(sql);
-            pst.setString(1, dto.getId());
-            pst.setString(2, dto.getTitle());
-            pst.setString(3, dto.getContent());
-            pst.setInt(4, dto.getRoot());
-            pst.setInt(5, dto.getStep());
-            pst.setInt(6, dto.getIndent());
-            pst.executeUpdate();    //답글 등록 성공-> stepUpdate
-            System.out.println("**stepUpdate Count => " + stepUpdate(dto));
-            
-            return 1;
-        } catch (Exception e) {
-            System.out.println("** ReplyInsert Exception =>"+ e.toString());
-            return 0;
-        }
-} // class
+	} //delete
+
+}//class

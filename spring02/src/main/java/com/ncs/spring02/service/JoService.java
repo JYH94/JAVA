@@ -6,14 +6,19 @@ import com.ncs.spring02.domain.JoDTO;
 
 public interface JoService {
 
+	// ** selectList
 	List<JoDTO> selectList();
 
-	JoDTO selectOne(int jno);
+	// ** selectOne
+	JoDTO selectOne(JoDTO dto);
 
+	// ** Insert
 	int insert(JoDTO dto);
 
+	// ** Update
 	int update(JoDTO dto);
 
-	int delete(int jno);
+	// ** Delete
+	int delete(JoDTO dto);
 
 }

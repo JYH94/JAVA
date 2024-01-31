@@ -73,12 +73,27 @@ insert into board values(
 => Login 한 경우에만 List 에서 글등록 할 수 있도록 메뉴 표시
 => 내글인 경우에만 boardDetail 에 글수정 과 글삭제 메뉴 표시하여 수정 또는 삭제할 수 있도록 
 
+2.3) 조회수 증가
+=> sql
+	-> 1) update board set cnt=cnt+1 where seq=?
+	-> 2) Java code에서 cnt+1 전달하면 set cnt=? 도 가능 (선택)
 
-2.3 ) 조회수 증가
-=> sql :
-	-> 1번 방법 update board set cnt=cnt+1 where seq=?
-	-> 2번 방법 Java code에서 cnt+1 을 전달한다면 dto.setCnt(dto.getCnt()+1) 도 가능하다
-	   cnt 증가시켜줬으면 service.update(dto) 를 통해 최신화 시켜주면 된다.
 => 조건 : 글쓴이와 글보는이가 다른경우
-=> 어디서? : detail 페이지에서
+=> 어디서: detail 에서 
+
+2.4) 계층적 답변형 게시판의 답글달기
+
+=> board 조회
+select seq, id, title, root, step, indent from board order by root desc, step asc;
+
+=> 각 컬럼의 역할
+	-> root: 원글의 seq
+	-> step: 댓글의 출력순서 (부모글+1 ,이전댓글들 step+1 로 수정 )
+	-> indent: 댓글의 레벨 (부모글+1)
+=> 원글  -> root: 자신의 seq ,  step: 0 , 		indent: 0
+=> 첫댓글 -> root: 원글의 seq ,  step: 1-2-3 로 변경 , indent: 1  
+   2댓글 -> root: 원글의 seq ,  step: 1-2 , 	indent: 1  		
+   3댓글 -> root: 원글의 seq ,  step: 1 , 		indent: 1   	
+
+=> 댓글 입력 Form 과 컨트롤러의 매핑메서드, 메뉴추가
 

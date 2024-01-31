@@ -1,42 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" 
-		href="/spring02/resources/myLib/myStyle.css" >
+	<meta charset="UTF-8">
+	<title>** Jo Update Spring_MVC2 **</title>
+	<link rel="stylesheet" type="text/css" href="/spring02/resources/myLib/myStyle.css">
 </head>
 <body>
-<h2>** 조 수정하기 **</h2>
-<form action="joUpdate" method="post">
-<label for="jno">
-	조번호<input type=text name="jno" id="jno" value="${requestScope.apple.jno}" readonly placeholder="조">
-</label>
-<br>
-<label for="jname">
-	조이름<input type=text name="jname" id="jname" value="${requestScope.apple.jname}">
-</label>
-<br>
-<label for="captain">
-	조장<input type=text name="captain" id="captain" value="${requestScope.apple.captain}">
-</label>
-<br>
-<label for="project">
-	프로젝트<input type=text name="project" id="project" value="${requestScope.apple.project}">
-</label>
-<br>
-<label for="slogan">
-	목표<input type=text name="slogan" id="slogan"  value="${requestScope.apple.slogan}">
-</label>
-<br>
-<input type=submit value="수정">
-<input type=reset value="리셋">
-</form>
-<br>
-<a href="/spring02/home">Home</a>
-<a href="javascript:history.back(-1);">이전으로</a>
+<h2>** Jo Update Spring_MVC2 **</h2>
+<hr>
+<form action="update" method="Post">
+	<table>
+	<tr height="40"><td bgcolor="Linen">Jno</td>
+		<td><input type="text" name="jno" value="${apple.jno}" size="20" readonly></td></tr>
+	<tr height="40"><td bgcolor="Linen">JoName</td>
+		<td><input type="text" name="jname" value="${apple.jname}" size="20"></td></tr>
+	<tr height="40"><td bgcolor="Linen">CaptainID</td>
+		<td><input type="text" name="captain" value="${apple.captain}" size="20"></td></tr>
+	<tr height="40"><td bgcolor="Linen">Project</td>
+		<td><input type="text" name="project" value="${apple.project}" size="20"></td></tr>
+	<tr height="40"><td bgcolor="Linen">Slogan</td>
+		<td><input type="text" name="slogan" value="${apple.slogan}" size="20"></td></tr>
+	<tr><td></td>
+		<td><input type="submit" value="수정">&nbsp;&nbsp;
+			<input type="reset" value="취소">
+		</td></tr>
+</table>
+</form>	
+<c:if test="${not empty message}">
+<hr>
+${message}<br>
+</c:if>
+<hr>
+<c:if test="${not empty loginID}">
+	&nbsp;&nbsp;<a href="delete?jno=${apple.jno}">[조삭제]</a>
+</c:if>
+&nbsp;&nbsp;<a href="joList">joList</a>
+&nbsp;&nbsp;<a href="javascript:history.go(-1)">이전으로</a>
+&nbsp;&nbsp;<a href="/spring02/home">[Home]</a>
 </body>
 </html>

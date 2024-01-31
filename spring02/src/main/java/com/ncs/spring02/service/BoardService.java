@@ -6,19 +6,22 @@ import com.ncs.spring02.domain.BoardDTO;
 
 public interface BoardService {
 	
-	//** selectList
-	public List<BoardDTO> selectList();
+	// ** selectList
+	public List<BoardDTO> selectList() ;
 	
-	//** selectOne
-	public BoardDTO selectOne(int seq);
+	// ** selectOne
+	public BoardDTO selectOne(int seq) ;
 	
-	//** Insert
-	public int insert(BoardDTO dto);
+	// ** insert
+	public int insert(BoardDTO dto) ;
 	
-	//** Update
-	public int update(BoardDTO dto);
+	// ** replyInsert
+	public int rinsert(BoardDTO dto) ;
 	
-	//** Delete
-	public int delete(int seq);
+	// ** update
+	public int update(BoardDTO dto) ;
+	
+	// ** delete
+	public int delete(BoardDTO dto) ;
 	
 } //class

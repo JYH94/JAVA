@@ -1,109 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>** JoDetail</title>
-<link rel="stylesheet" type="text/css" 
-		href="/spring02/resources/myLib/myStyle.css" >
+	<meta charset="UTF-8">
+	<title>** Jo Detail Spring_MVC2 **</title>
+	<link rel="stylesheet" type="text/css" href="/spring02/resources/myLib/myStyle.css">
 </head>
-<style>
-	th {
-		background-color: aqua;
-	}
-</style>
 <body>
-<h1>** 조 상세정보 **</h1>
-	<table border=1 style="width:90%; margin:0 auto;">
-		<tr>
-			<th>Jno</th>
-			<th>Jname</th>
-			<th>Captain</th>
-			<th>Project</th>
-			<th>Slogan</th>
-		</tr>
-		<tr>
-			<td>${requestScope.apple.jno }</td>
-			<td>${requestScope.apple.jname }</td>
-			<td>${requestScope.apple.captain }</td>
-			<td>${requestScope.apple.project }</td>
-			<td>${requestScope.apple.slogan }</td>
-		</tr>
+<h2>** Jo Detail Spring_MVC2 **</h2>
+<hr>
+<c:if test="${not empty requestScope.apple}"> 
+	<table>
+		<tr height="40"><td bgcolor="Lavender">Jno</td><td>${apple.jno}</td></tr>
+		<tr height="40"><td bgcolor="Lavender">JoName</td><td>${apple.jname}</td></tr>
+		<tr height="40"><td bgcolor="Lavender">CaptainID</td><td>${apple.captain}</td></tr>
+		<tr height="40"><td bgcolor="Lavender">Project</td><td>${apple.project}</td></tr>
+		<tr height="40"><td bgcolor="Lavender">Slogan</td><td>${apple.slogan}</td></tr>
 	</table>
-	
-	<br>
+</c:if>
+<c:if test="${empty requestScope.apple}">
 	<hr>
-	<br>
+	~~ 출력할 자료가 없습니다. ~~<br>
+</c:if>
+<hr>
+<h3>** ${apple.jno} Jo MemberList **</h3>
+<table width=100%> 
+	<tr bgcolor="LavenderBlush" height="30">
+		<th>I D</th><th>Password</th><th>Name</th><th>Age</th>
+		<th>Jno</th><th>Info</th><th>Point</th><th>Birthday</th><th>추천인</th>
+	</tr>
+	<c:if test="${not empty requestScope.banana}">
+		<c:forEach  var="m" items="${requestScope.banana}" >
+		<tr height="30">
+		<td>${m.id}</td>
+		<td>${m.password}</td><td>${m.name}</td><td>${m.age}</td><td>${m.jno}</td>
+		<td>${m.info}</td><td>${m.point}</td><td>${m.birthday}</td><td>${m.rid}</td>
+		</tr>
+		</c:forEach>	
+	</c:if>
+	<c:if test="${empty requestScope.banana}">
+		<tr><td colspan="9">~~ 출력할 자료가 없습니다. ~~</td></tr>
+	</c:if>
+</table>
 
-	
-	<%-- <c:if test="${!empty requestScope.test }">
-		<table border=1 style="width:90%; margin:0 auto;">
-			<tr>
-				<th>id</th>
-				<th>password</th>
-				<th>name</th>
-				<th>age</th>
-				<th>jno</th>
-				<th>info</th>
-				<th>point</th>
-				<th>birthday</th>
-				<th>rid</th>
-			</tr>
-			<c:forEach items="${requestScope.test }" var="list">
-				<tr>
-					<td>${list.id }</td>
-					<td>${list.password }</td>
-					<td>${list.name }</td>
-					<td>${list.age }</td>
-					<td>${list.jno }</td>
-					<td>${list.info }</td>
-					<td>${list.point }</td>
-					<td>${list.birthday }</td>
-					<td>${list.rid }</td>
-				</tr>
-			</c:forEach>
-		</table>
-	</c:if> --%>
-	<h1>** 조원 목록 **</h1>
-	<c:if test="${!empty requestScope.test2 }">
-		<table border=1 style="width:90%; margin:0 auto;">
-			<tr>
-				<th>id</th>
-				<th>password</th>
-				<th>name</th>
-				<th>age</th>
-				<th>jno</th>
-				<th>info</th>
-				<th>point</th>
-				<th>birthday</th>
-				<th>rid</th>
-			</tr>
-			<c:forEach items="${requestScope.test2 }" var="list">
-				<tr>
-					<td>${list.id }</td>
-					<td>${list.password }</td>
-					<td>${list.name }</td>
-					<td>${list.age }</td>
-					<td>${list.jno }</td>
-					<td>${list.info }</td>
-					<td>${list.point }</td>
-					<td>${list.birthday }</td>
-					<td>${list.rid }</td>
-				</tr>
-			</c:forEach>
-		</table>
-	</c:if>
-	<hr>
-		<c:if test="${!empty requestScope.jmessage } }">
-		${requestScope.jmessage }
-	</c:if>
-	<hr>
-	
-	<a href="/spring02/home">Home</a><br>
-	<a href="javascript:history.back(-1);">이전으로</a><br>
-	<a href="joUpdate?jno=${requestScope.apple.jno }">조 정보 수정하기</a><br>
-		&nbsp;<a href = "joDelete?jno=${requestScope.apple.jno }">조 삭제하기</a>&nbsp;
+<hr>
+<c:if test="${not empty message}">
+	${message}<br>
+</c:if>
+<hr>
+&nbsp;<a href="joInsert">[조등록]</a>&nbsp;
+&nbsp;<a href="detail?jCode=U&jno=${apple.jno}">[조수정]</a>&nbsp;
+&nbsp;<a href="delete?jno=${apple.jno}">[조삭제]</a><br>
+<hr>
+&nbsp;<a href="joList">joList</a>&nbsp;
+&nbsp;<a href="javascript:history.go(-1)">이전으로</a>&nbsp;
+&nbsp;<a href="/spring02/home">[Home]</a>&nbsp;
 </body>
 </html>

@@ -9,34 +9,34 @@ import com.ncs.spring02.domain.BoardDTO;
 import com.ncs.spring02.model.BoardDAO;
 
 @Service
-public class BoardServiceImpl implements BoardService{
-
+public class BoardServiceImpl implements BoardService {
+	
 	@Autowired
 	BoardDAO dao;
+	
+	@Override
+	public int rinsert(BoardDTO dto) {
+		return dao.rinsert(dto);
+	}
 	
 	@Override
 	public List<BoardDTO> selectList() {
 		return dao.selectList();
 	}
-
 	@Override
 	public BoardDTO selectOne(int seq) {
 		return dao.selectOne(seq);
 	}
-
 	@Override
 	public int insert(BoardDTO dto) {
 		return dao.insert(dto);
 	}
-
 	@Override
 	public int update(BoardDTO dto) {
 		return dao.update(dto);
 	}
-
 	@Override
-	public int delete(int seq) {
-		return dao.delete(seq);
+	public int delete(BoardDTO dto) {
+		return dao.delete(dto);
 	}
-	
-}
+} //class
