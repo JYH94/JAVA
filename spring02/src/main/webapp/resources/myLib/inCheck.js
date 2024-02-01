@@ -30,8 +30,8 @@
 
 // 1) ID (길이, 영문과 숫자만 가능)
 // => 영문과 숫자로만 입력했는지 :
-//	  id 에서 영문과 숫자를 모두 '' 로 변경했을때 length 가 0 이면 OK   
-function idCheck() {
+//	  id 에서 영문과 숫자를 모두 '' 로 변경했을때 length 가 0 이면 OK 
+/*function idCheck() {
 	let id = document.getElementById('id').value;
 	if (id.length < 4 || id.length > 10) {
 		document.getElementById('iMessage').innerHTML = 'id 4~10 글자 입니다';
@@ -43,65 +43,144 @@ function idCheck() {
 		document.getElementById('iMessage').innerHTML = '';
 		return true;
 	}
+}*/
+/*=======================================================*/
+// => test(검사대상문자열) 메서드 활용
+// 정규식에 정의된 문자가 아닌 문자가 있다면 false
+function idCheck() {
+	let special = /[a-z.0-9]/gi;
+	let id = document.getElementById('id').value;
+	if (id.length < 4 || id.length > 10) {
+		document.getElementById('iMessage').innerHTML = 'id 4~10 글자 입니다';
+		return false;
+	} else if( id.replace(special,"").length > 0 ) {
+		document.getElementById('iMessage').innerHTML = 'id 특수문자,한글 X';
+		return false;
+	} else {
+		document.getElementById('iMessage').innerHTML = '';
+		return true;
+	}
 }
-
+//=========================================================
 // 2) password
 function pwCheck() {
+	let special = /[a-z.0-9.!-*.@]/gi;
 	let pw = document.getElementById('password').value;
 	
 	if (pw.length < 4 || pw.length > 10) {
 		document.getElementById('pMessage').innerHTML = 'password 4~10 글자 입니다';
 		return false;
-	} else if ( pw.replace(/[a-z.0-9.!-*.@]/gi,'').length > 0 ) {
-		document.getElementById('pMessage').innerHTML = 'password 영문,숫자,특문 포함';
+	} else if ( pw.replace( /[a-z.0-9.!-*.@]/gi , '' ).length > 0 ) {
+		document.getElementById('pMessage').innerHTML = 'password 영문,숫자,특문만 가능';
 		return false;
-	} else if( !pw.contains(/[!-*]/g) ) {
-		document.getElementById('pMessage').innerHTML = 'password 특문 포함';
+	} else if( pw.replace( /[!-*.@]/gi , '' ).length >= pw.length ) {
+		document.getElementById('pMessage').innerHTML = 'password 특문 반드시 포함';
 		return false;
 		// => 특수문자는 반드시 포함
 	} else {
 		document.getElementById('pMessage').innerHTML = '';
 		return true;
-		
 	}
 	
-	return true;
 }
 
 // 3) password2
 function pw2Check() {
 	let pw2 = document.getElementById('password2').value;
+	let pw = document.getElementById('password').value;
 	
-	return true;
+	if( pw2 != pw ) {
+		document.getElementById('p2Message').innerHTML = 'password 다릅니다';
+		return false;
+	} else {
+		document.getElementById('p2Message').innerHTML = '';
+		return true;
+	}
 }
 
 
 // 4) name
 function nmCheck() {
+	//let check = /[a-z.ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/gi;
+	let check = /[a-z.가-힣]/gi;
 	let name = document.getElementById('name').value;
-	
-	return true;
+	if(name.replace(check,'').length > 0) {
+		document.getElementById('nMessage').innerHTML = 'name 한글,영어만';
+		return false;
+	} else if(name.length < 2 ) {
+		document.getElementById('nMessage').innerHTML = 'name 2글자 이상';
+		return false;
+	} else {
+		document.getElementById('nMessage').innerHTML = '';
+		return true;
+	}
 }
 
 // 5) age
+// => Number.isInterger(n) 정수일때만 true
+//	단, n 은 숫자타입이어야 한다.
+//	parseInt 이용
+//	단 사용시 주의 사항 :
+//		실수의 경우에는 정수만 사용 ( 123.56 -> 123)
+//		숫자 뒤쪽에 문자가 포함되면 앞쪽 숫자만 가져오는 상항(123ab -> 123)
+//		문자로 시작하면 문자로 취급, NaN 리턴
+//		숫자가 아닌값이 있는지 확인,
+//		
 function agCheck() {
 	let age = document.getElementById('age').value;
+	let check = /[^0-9]/gi;
+	let test = Number.parseInt(age);
 	
-	return true;
+	if(age.replace(check,'').length < age.length 
+		|| Number.isInteger(test) == false) {
+		document.getElementById('aMessage').innerHTML = 'age 정수만';
+		return false;
+	} else {
+		document.getElementById('aMessage').innerHTML = '';
+		return true;
+	}
 }
 
 // 6) point
+// 정수, 실수 모두 허용
 function poCheck() {
 	let point = document.getElementById('point').value;
-	
-	return true;
+	let test = Number.parseFloat(point);
+	let check = /[^0-9.\.]/g;
+	//	0~9, '.' 
+	let message = document.getElementById('oMessage').innerHTML;
+
+	// => 숫자 아닌값이 있는지 확인
+	// => 단, 소수점은 허용
+	//		( 비교값으로 소숫점을 사용하기 위해 /. 표기함)
+	if ( point.replace(check,'').length < point.length ||
+		Number.isNaN(test)) {
+		document.getElementById('oMessage').innerHTML = '정수, 실수만 입력가능합니다';
+		return false;
+	} else if( test < 100 || test > 10000 ) {
+		document.getElementById('oMessage').innerHTML = '포인트값이 범위(100~10000)를 벗어납니다';
+		return false;
+	} else if (point.length - point.replace('.','').length > 1   )  {
+		document.getElementById('oMessage').innerHTML = '점 두개 찍었다';
+		return false;
+	} else {
+		document.getElementById('oMessage').innerHTML = '';
+		return true;
+	}
 }
 
 // 7) birthday
 function bdCheck() {
 	let birthday = document.getElementById('birthday').value;
 	
-	return true;
+	if(birthday.length != 10) {
+		document.getElementById('bMessage').innerHTML = '생일 입력 확인하세요';
+		return false;
+	} else {
+		document.getElementById('bMessage').innerHTML = '';
+		return true;
+	}
+	
 }
 
 

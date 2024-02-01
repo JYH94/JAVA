@@ -4,25 +4,81 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>** LoginForm **</title>
-	<link rel="stylesheet" type="text/css" 
-		  href="/spring02/resources/myLib/myStyle.css" >
+<meta charset="UTF-8">
+<title>** LoginForm **</title>
+<link rel="stylesheet" type="text/css" 
+	  href="/spring02/resources/myLib/myStyle.css" >
+<script src="/spring02/resources/myLib/inCheck.js"></script>
+
+<script>
+"use strict"
+
+   let iCheck=false;
+   let pCheck=false;
+   onload=function() {
+	   document.getElementById('id').focus();
+	   document.getElementById('id').addEventListener('keydown',
+	         (e)=>{
+	            if (e.which==13) {
+	               e.preventDefault();
+	               // => form 에서는
+	               // => enter 누르면 자동 submit 발생되므로 이를 제거함
+	               document.getElementById('password').focus();
+	            }//if
+	         });
+	   // -> 무결성 점검 
+	    document.getElementById('id').addEventListener('focusout', ()=>{ iCheck=idCheck(); });
+	   
+	   // => Password
+	    document.getElementById('password').addEventListener('keydown',
+	         (e)=>{
+	            if (e.which==13) {
+	               e.preventDefault();
+	               document.getElementById('submitTag').focus();
+	               if (!pCheck ) pCheck=pwCheck();
+	               else document.getElementById('myForm').submit();
+	            }//if
+	         });
+	   // -> 무결성 점검 
+	    document.getElementById('password').addEventListener('focusout', ()=>{ pCheck=pwCheck(); });
+   } //onload
+   
+   function inCheck() {
+	   
+	   if (!iCheck) { document.getElementById('iMessage').innerHTML=' 필수입력, id 를 확인하세요~~'; }
+	   if (!pCheck) { document.getElementById('pMessage').innerHTML=' 필수입력, password 를 확인하세요~~'; }
+	   
+	   if (iCheck && pCheck ) {
+	      return true;
+	   }else {
+	      return false
+	   } //Check_조건
+	   
+	} //inCheck
+    // => password 에서 입력후 Enter_Key 누르면 바로 submit 진행 되도록~~
+    //     type="submit" 을 사용하는경우 정확하게 적용하기 어려워 적용하지 않음    
+    //if (!iCheck) iCheck=idCheck();
+    //else if (!pCheck) pCheck=pwCheck();
+    //else document.getElementById('myForm').submit();
+</script>
+
 </head>
 <body>
 <h2>** Spring_MVC2 LoginForm **</h2>
-<form action="login" method="post">
+<form id="myForm" action="login" method="post">
 <table>
 	<tr height="40">
 		<td bgcolor="Gold"><label for="id">I D</label></td>
-		<td><input type="text" name="id" id="id" size="20"></td>
+		<td><input type="text" name="id" id="id" size="20"><br>
+		<span id="iMessage" class="eMessage"></span></td>
 	</tr>
 	<tr height="40">
 		<td bgcolor="Gold"><label for="password">Password</label></td>
-		<td><input type="password" name="password" id="password" size="20"></td>
+		<td><input type="password" name="password" id="password" size="20">
+		<span id="pMessage" class="eMessage"></span><br></td>
 	</tr>
 	<tr><td></td>
-		<td><input type="submit" value="로그인">&nbsp;&nbsp;
+		<td><input type="submit" id="submitTag" value="로그인" onclick="return inCheck()">&nbsp;&nbsp;
 			<input type="reset" value="취소">
 		</td>
 	</tr>

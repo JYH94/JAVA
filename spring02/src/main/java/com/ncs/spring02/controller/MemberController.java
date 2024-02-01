@@ -1,11 +1,11 @@
 package com.ncs.spring02.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -212,6 +212,21 @@ public class MemberController {
 		return uri;
 	} //detail
 	
+	
+	@GetMapping("/idDupCheck")
+	public void idDupCheck(@RequestParam("id")String id, Model model) {
+		// 1) newID 존재여부 확인 &
+		if( service.selectOne(id) != null ) {
+			// => 사용불가능 (id가 중복이라는 소리)
+			model.addAttribute("idUse", "F");
+		} else {
+			// => 사용가능
+			model.addAttribute("idUse", "T");
+		}
+		
+	}
+	
+	
 	// ** Member List
 	@RequestMapping(value="/memberList", method = RequestMethod.GET)
 	public void mList(Model model) {
@@ -299,5 +314,7 @@ public class MemberController {
 		}
 		return uri;
 	} //delete
+	
+
 	
 } //class
