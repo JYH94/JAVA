@@ -144,19 +144,19 @@ public class MemberDAO {
 	// ** update
 	// => id(P.Key) 제외한 모든컬럼 수정 
 	public int update(MemberDTO dto) {
-		sql="update member set password=?, name=?, age=?, jno=?, info=?"
+		sql="update member set name=?, age=?, jno=?, info=?"
 				+ ", point=?, birthday=?, rid=? where id=?";
 		try {
+			
 			pst=cn.prepareStatement(sql);
-			pst.setString(1, dto.getPassword());
-			pst.setString(2, dto.getName());
-			pst.setInt(3, dto.getAge());
-			pst.setInt(4, dto.getJno());
-			pst.setString(5, dto.getInfo());
-			pst.setDouble(6, dto.getPoint());
-			pst.setString(7, dto.getBirthday());
-			pst.setString(8, dto.getRid());
-			pst.setString(9, dto.getId());
+			pst.setString(1, dto.getName());
+			pst.setInt(2, dto.getAge());
+			pst.setInt(3, dto.getJno());
+			pst.setString(4, dto.getInfo());
+			pst.setDouble(5, dto.getPoint());
+			pst.setString(6, dto.getBirthday());
+			pst.setString(7, dto.getRid());
+			pst.setString(8, dto.getId());
 			
 			return  pst.executeUpdate(); // 처리갯수
 		} catch (Exception e) {
@@ -164,6 +164,26 @@ public class MemberDAO {
 			return 0;
 		}
 	} //update
+	
+	
+	//** pwUpdate
+	public int pwUpdate(MemberDTO dto) {
+		sql="update member set password = ? where id = ?";
+		
+		try {
+			pst=cn.prepareStatement(sql);
+			pst.setString(1, dto.getPassword());
+			pst.setString(2, dto.getId());
+			
+			return pst.executeUpdate(); 
+			
+		} catch (Exception e) {
+			System.out.println("** pwUpdate Exception => "+e.toString());
+			return 0;
+		}
+		
+		
+	}
 	
 	// ** delete
 	public int delete(String id) {

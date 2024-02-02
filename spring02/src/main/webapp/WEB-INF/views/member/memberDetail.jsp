@@ -41,6 +41,9 @@
 => ${requestScope.message}<br>
 </c:if>
 <hr>
+
+
+
 &nbsp;<a href="javascript:history.go(-1)">이전으로</a>&nbsp;
 &nbsp;<a href="/spring02/home">Home</a>&nbsp;
 </body>

@@ -3,9 +3,12 @@ package com.ncs.spring02.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ncs.spring02.domain.MemberDTO;
 import com.ncs.spring02.service.MemberService;
+
+import lombok.AllArgsConstructor;
 
 //** IOC/DI 적용 ( @Component 의 세분화 ) 
 //=> 스프링 프레임워크에서는 클래스들을 기능별로 분류하기위해 @ 을 추가함.
@@ -137,6 +142,12 @@ public class MemberController {
 	@Autowired(required = false)
 	MemberService service;
 	
+	@Autowired
+	PasswordEncoder passwordEncoder; 
+	// = new BcryptPasswordEncoder(); 
+	//	-> root~~~.xml 에 bean 등록
+	// 
+	
 // ** Login Form 출력	
 // => ver01 : return String	
 //	public String loginForm(Model model) {
@@ -151,7 +162,7 @@ public class MemberController {
 	public void loginForm() {
 	} //loginForm
 	
-	@RequestMapping(value="/login", method=RequestMethod.POST)
+	@PostMapping("/login")
 	public String login(HttpSession session, Model model, MemberDTO dto) {
 		// => 매핑메서드의 인자객체 와 동일한 컬럼명의 값은 자동으로 할당함. 	
 		//		아래의 구문은 필요없음
@@ -172,11 +183,15 @@ public class MemberController {
 		// => 성공: id, name은 session에 보관, home 으로
 		// => 실패: 재로그인 유도
 		dto = service.selectOne(dto.getId());
-		if ( dto !=null && dto.getPassword().equals(password)) {
-			// 성공
+		// = PasswordEncoder 적용
+		//if ( dto !=null && dto.getPassword().equals(password)) {
+		if ( dto !=null && passwordEncoder.matches(password, dto.getPassword())) {
+			// 위에서 파라미터로 받아온 password를 변수(password)로 저장해두고
+			// 밑에서 dto를 뽑아온 객체로 초기화 시키고, 객체의 패스워드는 digest처리되어 있기 때문에 패스워드인코더의 match메서드를
+			// 통해 암호화된 패스워드를 확인하자
 			session.setAttribute("loginID", dto.getId());
 			session.setAttribute("loginName", dto.getName());
-		}else {
+		} else {
 			// 실패
 			uri="member/loginForm";
 			model.addAttribute("message", "~~ id 또는 password 오류 !! 다시하세요 ~ ");
@@ -249,7 +264,7 @@ public class MemberController {
 //	} //joinForm
 
 	// ** Join
-	@RequestMapping(value="/join", method = RequestMethod.POST)
+	@PostMapping("/join")
 	public String join(Model model, MemberDTO dto) {
 		// 1. 요청분석
 		// => 이전: 한글처리, request 값 -> dto 에 set
@@ -257,6 +272,10 @@ public class MemberController {
 		String uri = "member/loginForm"; //성공시
 		
 		// 2. Service & 결과
+		// => 패스워드 인코더를 적용하기 위해
+		//	회원가입시 입력받은 패스워드 digest 화
+		
+		dto.setPassword(passwordEncoder.encode(dto.getPassword()));
 		if ( service.insert(dto) > 0 ) {
 			model.addAttribute("message", "~~ 회원가입 성공 !! 로그인 후 이용하세요 ~~");
 		}else { 
@@ -266,6 +285,39 @@ public class MemberController {
 		}
 		return uri;
 	} //join
+	
+	
+	// ** Password 수정 (PasswordEncorder 추가 후 )
+	// => Service, DAO 에 pwUpdate(dto) 메서드 추가
+	// => 성공 시, 세션무효화 + 재로그인 하도록 
+	// => 실패 시, pwUpdate, 재수정 유도
+	@GetMapping("/pwUpdate")
+	public void pwUpdate() {
+		// View_name 생략
+	}
+	
+	@PostMapping("/pwUpdate")
+	public String pwUpdate(Model model, MemberDTO dto, HttpSession session) {
+		// 1) 요청 분석
+		// => id값을 가져와야 한다
+		// => pw : 암호화 해줘야 한다.
+		dto.setId((String)session.getAttribute("loginID"));
+		dto.setPassword(passwordEncoder.encode(dto.getPassword()));
+		String uri="member/loginForm"; // 성공시
+		
+		
+		// 2) service 처리
+		if(service.pwUpdate(dto) > 0) {
+			session.invalidate();
+			model.addAttribute("message", "변경 성공~ 재로그인");
+		} else {
+			uri ="member/pwUpdate";
+			model.addAttribute("message", "변경 실패");
+		}
+		return uri;
+	}
+	
+	
 	
 	// ** Update
 	@RequestMapping(value="/update", method = RequestMethod.POST)
@@ -278,6 +330,7 @@ public class MemberController {
 		model.addAttribute("apple", dto);
 		
 		// 2. Service & 결과
+		// passwordEncoder 처리
 		if ( service.update(dto) > 0 ) {
 			model.addAttribute("message", "~~ 회원 정보 수정 성공 !! ~~");
 			// => name 을 수정할수도 있으므로 loginName 을 수정해준다

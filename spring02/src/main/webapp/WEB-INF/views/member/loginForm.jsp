@@ -15,6 +15,7 @@
 
    let iCheck=false;
    let pCheck=false;
+   
    onload=function() {
 	   document.getElementById('id').focus();
 	   document.getElementById('id').addEventListener('keydown',

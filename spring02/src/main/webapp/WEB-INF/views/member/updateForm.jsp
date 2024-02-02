@@ -21,10 +21,12 @@
 				 -> disabled: 서버로 전송되지않음
 				-->
 	</tr>
-	<tr height="40">
+	
+	<%-- PasswordEncoder 적용 후 분리시키자
+	 <tr height="40">
 		<td bgcolor="DeepSkyBlue"><label for="password">Password</label></td>
 		<td><input type="password" name="password" id="password" value="${requestScope.apple.password}" size="20"></td>
-	</tr>
+	</tr> --%>
 	<tr height="40">
 		<td bgcolor="DeepSkyBlue"><label for="name">Name</label></td>
 		<td><input type="text" name="name" id="name" value="${requestScope.apple.name}" size="20"></td>
@@ -69,6 +71,8 @@
 <c:if test="${!empty requestScope.message}">
 => ${requestScope.message}<br>
 </c:if>
+<br>
+&nbsp;<a href="/spring02/member/pwUpdate">Password수정</a>&nbsp;
 <hr>
 &nbsp;<a href="/spring02/home">Home</a>&nbsp;
 &nbsp;<a href="javascript:history.go(-1)">이전으로</a>&nbsp;

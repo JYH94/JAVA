@@ -5,4 +5,8 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
+	<!-- 스프링 시큐리티 라이브러리 등록 BcryptPasswordEncoder -->
+	<bean id="bcryptPasswordEncoder" 
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+		
 </beans>

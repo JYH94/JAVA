@@ -17,12 +17,12 @@
 </c:if>
 <table border="1" style="width:100%">
 <tr bgcolor="#80c0ff" >
-	<th>ID</th><th>Password</th><th>Name</th><th>Age</th><th>Jno</th>
+	<th>ID</th><!-- <th>Password</th> --><th>Name</th><th>Age</th><th>Jno</th>
 	<th>Info</th><th>Point</th><th>Birthday</th><th>추천인</th>
 </tr>
 <c:if test="${!empty requestScope.banana}">
 	<c:forEach var="m" items="${requestScope.banana}">
-		<tr><td>${m.id}</td><td>${m.password}</td><td>${m.name}</td><td>${m.age}</td><td>${m.jno}</td>
+		<tr><td>${m.id}</td><%-- <td>${m.password}</td> --%><td>${m.name}</td><td>${m.age}</td><td>${m.jno}</td>
 			<td>${m.info}</td><td>${m.point}</td><td>${m.birthday}</td><td>${m.rid}</td>
 		</tr>	
 	</c:forEach>
