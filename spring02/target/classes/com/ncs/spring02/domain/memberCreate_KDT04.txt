@@ -14,24 +14,25 @@
 -----------------------------------------------------------------------------------
 ** Student & Jo (수정전)
 create table student(
-		sno int  auto_increment,
-		name varchar(10) not null,
-		age int(3),
-		jno int(1),
-		info varchar(30),
-		point float(5,2) default 100,
-		Primary Key(sno),
-		Check(age>15 and age<100)
+      sno int  auto_increment,
+      name varchar(10) not null,
+      age int(3),
+      jno int(1),
+      info varchar(30),
+      point float(5,2) default 100,
+      Primary Key(sno),
+      Check(age>15 and age<100)
   );
 
 create table jo (
-		jno int(1),
-		jname varchar(10) not null,
-		captain int not null,
-		project varchar(20) not null,
-		slogan varchar(30) not null,
-		Primary Key(jno)
-	);
+      jno int(1),
+      jname varchar(10) not null,
+      captain int not null,
+      project varchar(20) not null,
+      slogan varchar(30) not null,
+      Primary Key(jno)
+   );
+
 -----------------------------------------------------------------------------------
 *** web02 를 위한 Table 작업
 
@@ -39,8 +40,8 @@ create table jo (
 => Create
 drop table member;
 
-create  table member (    
-id varchar(10) primary key,
+create table member (    
+id varchar(10) primary key ,
 password varchar(10) not null,
 name varchar(30),
 age int(3),
@@ -57,14 +58,14 @@ insert into member(id, password, name, age, jno, info, point)
 select sno, sno, name, age, jno, info, point from student;  
 
 select * from member;
-update member set password='12345!' , birthday='1999-09-09' ;
+update member set password='12345!' , birthday='1999-09-09';
 
 select * from member;
 
 => password update
 update member set password='12345!';
 
-=> 각자 id , rid , birthday 수정문 올려주세요~
+=> 각자 id 와 rid 수정문 올려주세요~
 update member set id='banana', rid='apple', birthday='1999-09-09' where id='17';
 update member set id='green', rid='apple', birthday='1999-09-09' where id='18';
 update member set birthday='1992-10-11', id='simsim916' ,rid='juh94' where name='최문석';
@@ -85,7 +86,7 @@ update member set id='dungdungik', rid='dbrghl23', birthday='1994-02-23' where n
 
 select * from member;
 
--> 관리조 는 모두 7조로 변경
+-> 관리조는 모두 7조로 변경
 update member set jno=7 where jno=9;
 
 2) Jo 
@@ -96,44 +97,66 @@ ALTER TABLE jo MODIFY captain varchar(10);
 update jo set captain='kso' where captain='3';
 update jo set captain='agr4005' where captain ='2';
 update jo set captain='bamboo7' where jno = '3';
-update jo set captain='simsim916' where jno ='1';	
-update jo set captain='admin' where jno ='7';	
+update jo set captain='simsim916' where jno ='1';   
+update jo set captain='admin' where jno ='7';   
+	
 select * from jo;
 
 ==============================================
 
-3) Java Code : 프로젝트 web02
+3) Java Code : 프로젝트 Web02
 
 => MemberVO, MemberDAO, MemberService
 => Controller, View
-=> memberList
+=> memberList, memberDetail
 
-4) 로그인, 로그아웃, MyInfo 구현
-=> loginForm.jsp , 컨트롤러 C02_Login,  컨트롤러 C02_Logout
+4) 로그인, 로그아웃 구현
+=> loginForm.jsp , 컨트롤러 C03_mLogin,  컨트롤러 C03_mLogout
 => 로그인 성공 : index.html -> index.jsp  : ~~님 안녕하세요 ~~, 로그인후 메뉴로
 => 로그인 실패 : loginForm 으로 재로그인 유도
 
-=> Myinfo(mdetail)
-	-> C03_mDetail.java, memberDetail.jsp 
-
 5) 회원가입 구현
 => index.jsp : 메뉴추가 ( JoinF -> joinForm.jsp )
-=> joinForm.jsp : action="/web02/mjoin"
-=> 컨트롤러 : C04_mJoin.java 
+=> joinForm.jsp : action="/Web02/mjoin"
+=> 컨트롤러 : C05_mJoin.java 
 		-> 성공 : 로그인 유도 ( loginForm.jsp )
 		-> 실패 : 재가입 유도 ( joinForm.jsp )
 
 6) 내정보 수정하기
 => 메뉴 추가
-=> 수정 -> 내정보를 표시한 (Controller) ->  수정가능한  Form :  updateForm.jsp
-=> 컨트롤러 : C05_mUpdatejava 
+=> 수정 -> 내정보를 표시한 (Controller)  수정가능한  Form :  updateForm.jsp
+=> 컨트롤러 : C06_mUpdatejava 
 		-> 성공 : 내정보 표시 ( memberDetail.jsp )
 		-> 실패 : 재수정 유도 ( updateForm.jsp )
 
 7) 회원탈퇴
 => 메뉴 추가
-=> 삭제 컨트롤러 : C06_mDelete.java 
-		-> 성공 : home.jsp ( message : 탈퇴 성공 !!! )
-		-> 실패 : home.jsp ( message : 탈퇴 실패 !!! )
+=> 삭제 컨트롤러 : C07_mDelete.java 
+		-> 성공 : index.jsp ( message : 탈퇴 성공 !!! )
+		-> 실패 : index.jsp ( message : 탈퇴 실패 !!! )
  
 =========================================================
+** Upload File
+1) Table
+=> file 정보(경로와 파일명) 보관 컬럼 추가 : uploadfile varchar(50) default 'basicman1.jpg';
+	alter table member ADD uploadfile varchar(50) default 'basicman1.jpg';
+	
+	
+=> 기본값 넣어놓기
+	update member set uploadfile='siba.png' where jno=1;
+	update member set uploadfile='smile.jpg' where jno=2;
+	update member set uploadfile='bear.gif' where jno=3;
+	update member set uploadfile='bbb.gif' where jno=4;
+	update member set uploadfile='yyy.gif' where jno=7;
+	
+	select id, name, jno, uploadfile from member;
+	
+=> IDE(이클립스)에 준비
+	wepapp/resources/uploadImages/ 에 위의 화일들 복사해놓기
+	
+2) Java Code 작업
+2.1) List 출력
+=> memberList, memberDetail, ~DTO, ~DAO
+
+2.2) 입력, 수정폼 수정하기
+=> joinForm, updateForm

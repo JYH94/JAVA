@@ -17,10 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 	
-	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	@RequestMapping(value={"/", "/home"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/","/home"}, method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -30,7 +29,7 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";
-	}
+	}//home
 	
 	@GetMapping("/bcrypt")
 	   public String bcrypt() {
@@ -61,4 +60,5 @@ public class HomeController {
 	      
 	      return "redirect:home";
 	   } //bcrypt
+	
 }

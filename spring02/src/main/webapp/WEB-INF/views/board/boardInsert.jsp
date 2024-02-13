@@ -1,17 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>     
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>** Board Insert **</title>
-	<link rel="stylesheet" type="text/css" 
-		  href="/spring02/resources/myLib/myStyle.css">
+<meta charset="UTF-8">
+<title>** Board Insert **</title>
 </head>
 <body>
-<h2>** Spring MVC2 Board Insert **</h2>
-<form action="insert" method="post">
+<h2>** 새로운 게시글 작성 **</h2>
+
+<form action="insert">
 <table>
 	<tr height="40">
 		<td bgcolor="YellowGreen"><label for="id">I D</label></td>
@@ -32,13 +31,11 @@
 		</td>
 	</tr>
 </table>
-</form>e
-<br><hr>
+</form>
+<br>
 <c:if test="${!empty requestScope.message}">
-=> ${requestScope.message}<br>
+=> ${requestScope.message}
 </c:if>
-<hr>
-&nbsp;<a href="/spring02/home">Home</a>&nbsp;
-&nbsp;<a href="javascript:history.go(-1)">이전으로</a>&nbsp;
+<br><hr>
 </body>
 </html>

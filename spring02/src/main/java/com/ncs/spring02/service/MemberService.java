@@ -6,27 +6,25 @@ import com.ncs.spring02.domain.MemberDTO;
 
 public interface MemberService {
 
-	// ** selectJoList
-	// => 조별 맴버 검색
-	List<MemberDTO> selectJoList(int jno);
-
-	// ** selectList
-	List<MemberDTO> selectList();
-
-	// ** selectOne
-	MemberDTO selectOne(String id);
-
-	// ** insert
-	int insert(MemberDTO dto);
-
-	// ** update
-	int update(MemberDTO dto);
-
-	// ** Password update
-	int pwUpdate(MemberDTO dto);
+	//** selectList
+	public List<MemberDTO> selectList();
 	
-	// ** delete
-	int delete(String id);
+	//** selectOne
+	public MemberDTO selectOne(String id);
 	
+	//** insert
+	public int insert(MemberDTO dto);
+	
+	//** update
+	public int update(MemberDTO dto);
+	
+	//** Password_Update
+	public int pwUpdate(MemberDTO dto);
+	
+	//** delete
+	public int delete(String id);
+	
+	//** selectJoList
+	public List<MemberDTO> selectJoList(String jno);
 
 }

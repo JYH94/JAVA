@@ -3,40 +3,37 @@ package com.ncs.spring02.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.ncs.spring02.domain.JoDTO;
 import com.ncs.spring02.model.JoDAO;
 
-@Service
-public class JoServiceImpl implements JoService {
+public class JoServiceImpl implements JoService{
+
 	@Autowired
 	JoDAO dao;
 	
-	// ** selectList
-	@Override
-	public List<JoDTO> selectList() {
-		return dao.selectList();
+	//**selectJoList
+	public List<JoDTO> selectJoList(){
+		return dao.selectJoList();
 	}
-	// ** selectOne
-	@Override
-	public JoDTO selectOne(JoDTO dto) {
-		return dao.selectOne(dto);
+	
+	//**selectJoDetail
+	public JoDTO selectJoDetail(String jno) {
+		return dao.selectJoDetail(jno);
 	}
-	// ** Insert
-	@Override
+	
+	//**insert
 	public int insert(JoDTO dto) {
 		return dao.insert(dto);
 	}
-	// ** Update
-	@Override
+	
+	//**update
 	public int update(JoDTO dto) {
 		return dao.update(dto);
 	}
-	// ** Delete
-	@Override
-	public int delete(JoDTO dto) {
-		return dao.delete(dto);
+	
+//	**delete
+	public int delete(String jno) {
+		return dao.delete(jno);
 	}
-
-}//class
+}

@@ -4,24 +4,24 @@ import java.util.List;
 
 import com.ncs.spring02.domain.BoardDTO;
 
+
 public interface BoardService {
-	
-	// ** selectList
+
+	// List
 	public List<BoardDTO> selectList() ;
-	
-	// ** selectOne
+
+	// Detail
 	public BoardDTO selectOne(int seq) ;
-	
-	// ** insert
+
+	// Insert
 	public int insert(BoardDTO dto) ;
 	
-	// ** replyInsert
+	//replyInsert
 	public int rinsert(BoardDTO dto) ;
-	
-	// ** update
+
+	// Update
 	public int update(BoardDTO dto) ;
-	
-	// ** delete
+
+	// Delete
 	public int delete(BoardDTO dto) ;
-	
-} //class
+}
