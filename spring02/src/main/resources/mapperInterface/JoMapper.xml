@@ -4,12 +4,13 @@
 
 
 <select id="selectJoList">
-
+	
 </select>
 
 <select id="selectJoDetail">
-
+	
 </select>
+
 
 
 </mapper>
