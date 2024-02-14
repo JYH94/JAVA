@@ -3,14 +3,25 @@
 <mapper namespace="mapperInterface.JoMapper">
 
 
-<select id="selectJoList">
-	
+<select id="selectJoList" resultType="com.ncs.spring02.domain.JoDTO">
+	select * from jo
 </select>
 
-<select id="selectJoDetail">
-	
+<select id="selectJoDetail" resultType="com.ncs.spring02.domain.JoDTO">
+	select * from jo where jno = #{jno}
 </select>
 
+<insert id="insert">
+	insert into jo values(#{jno},#{jname},#{captain},#{project},#{slogan})
+</insert>
+
+<update id="update">
+	update jo set jname=#{jname}, captain=#{captain}, project=#{project}, slogan=#{slogan} Where jno=#{jno}
+</update>
+
+<delete id="delete">
+	delete from jo where jno=#{jno}
+</delete>
 
 
 </mapper>

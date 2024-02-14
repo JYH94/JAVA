@@ -71,7 +71,7 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.delete(id);
 	}
 	
-	//** selectJoList
+//	** selectJoList
 	public List<MemberDTO> selectJoList(String jno) {
 		return mapper.selectJoList(jno);
 	}

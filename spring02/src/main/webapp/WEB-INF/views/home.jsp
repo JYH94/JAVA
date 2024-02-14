@@ -44,5 +44,9 @@
 &nbsp;<a href ="jo/joList">JList</a>&nbsp;
 &nbsp;<a href ="board/boardList">boardList</a>&nbsp;
 &nbsp;<a href ="bcrypt">BCrypt</a>&nbsp;
+
+<br>
+&nbsp;<a href ="board/bPageList">BPage</a>&nbsp;
+
 </body>
 </html>

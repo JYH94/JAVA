@@ -47,9 +47,11 @@ public interface MemberMapper {
 		
 		//** delete
 		public int delete(String id);
-		
-		//** selectJoList
+
 		public List<MemberDTO> selectJoList(String jno);
+		
+//		** selectJoList
+//		public List<MemberDTO> selectJoList(String jno);
 	
 	
 }

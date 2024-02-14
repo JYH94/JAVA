@@ -3,37 +3,40 @@ package com.ncs.spring02.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ncs.spring02.domain.JoDTO;
-import com.ncs.spring02.model.JoDAO;
 
+import mapperInterface.JoMapper;
+
+@Service
 public class JoServiceImpl implements JoService{
 
 	@Autowired
-	JoDAO dao;
+	JoMapper mapper;
 	
 	//**selectJoList
 	public List<JoDTO> selectJoList(){
-		return dao.selectJoList();
+		return mapper.selectJoList();
 	}
 	
 	//**selectJoDetail
 	public JoDTO selectJoDetail(String jno) {
-		return dao.selectJoDetail(jno);
+		return mapper.selectJoDetail(jno);
 	}
 	
 	//**insert
 	public int insert(JoDTO dto) {
-		return dao.insert(dto);
+		return mapper.insert(dto);
 	}
 	
 	//**update
 	public int update(JoDTO dto) {
-		return dao.update(dto);
+		return mapper.update(dto);
 	}
 	
 //	**delete
 	public int delete(String jno) {
-		return dao.delete(jno);
+		return mapper.delete(jno);
 	}
 }
