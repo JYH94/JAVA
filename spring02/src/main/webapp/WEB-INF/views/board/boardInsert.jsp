@@ -32,6 +32,7 @@
 	</tr>
 </table>
 </form>
+<a href="javascript:history.go(-1)">이전으로</a>
 <br>
 <c:if test="${!empty requestScope.message}">
 => ${requestScope.message}

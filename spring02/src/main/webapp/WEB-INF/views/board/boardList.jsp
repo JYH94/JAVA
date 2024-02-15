@@ -20,7 +20,7 @@
 		<th>조회수!</th>
 	</tr>
 	<c:if test="${!empty sessionScope.loginID }">
-		<c:forEach items="${ requestScope.apple}" var="list">
+		<c:forEach items="${ requestScope.banana}" var="list">
 			<tr>
 				<td>${list.seq }</td>
 				<!-- 답글 등록 후 Title 출력 전에 들여쓰기 추가  -->

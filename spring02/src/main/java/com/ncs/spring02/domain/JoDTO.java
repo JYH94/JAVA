@@ -15,6 +15,7 @@ public class JoDTO{
 	private String project;
 	private String slogan;
 //	private String uploadfile;
+	private String cname;
 
 
 	//** 1) 생성자
