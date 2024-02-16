@@ -35,14 +35,18 @@ public class PageMaker {
 	
 	private boolean prev; // 이전 PageBlock 으로
 	private boolean next; // 다음 PageBlock 으로
-	
-//	Criteria cri;
+	private String mappingName;
 	SearchCriteria cri;
-	
+    //Criteria cri;
 	// ** 필요값 계산
 	// 1) Criteria
 	// => ver01 : Criteria
 	// => ver02 : SearchCriteria
+	
+    public void setMappingName(String mappingName) {
+        this.mappingName = mappingName;
+    }
+	
 	public void setCri(SearchCriteria cri) {
 		this.cri=cri;
 	}

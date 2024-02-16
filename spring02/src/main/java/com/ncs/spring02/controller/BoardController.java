@@ -1,5 +1,6 @@
 package com.ncs.spring02.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -55,12 +56,16 @@ public class BoardController {
 	// => ver01 : Criteria 를 사용
 	// => ver02 : SearchCriteria(Criteria 상속) 사용(검색기능추가)
 	@GetMapping("/bPageList")
-	public void bPageList(Model model, SearchCriteria cri, PageMaker pageMaker) {
+	public void bPageList(Model model,HttpServletRequest request, SearchCriteria cri, PageMaker pageMaker) {
+							
 		// 1) Criteria 처리
 		// => ver01 : currPage, rowsPerPage 값들은 Parameter 로 전달되어 자동으로 cri에 set
 		// => ver02 : ver01 + searchType, keyword 도 동일하게 cri에 set
 		cri.setSnoEno();
 		
+		
+		String mappingName = request.getRequestURI().substring(request.getRequestURI().lastIndexOf("/")+1);
+        pageMaker.setMappingName(mappingName);
 		// 2) Service
 		// => 출력 대상 Rows 를 select 
 		// => ver01, 02 모두 같은 Service메서드 사용,

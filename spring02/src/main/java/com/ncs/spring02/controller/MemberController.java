@@ -24,6 +24,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ncs.spring02.domain.MemberDTO;
 import com.ncs.spring02.service.MemberService;
 
+import pageTest.PageMaker;
+import pageTest.SearchCriteria;
+
 //** IOC/DI 적용( @Component의 세분화 )
 
 //=> 스프링 프레임워크에서는 클래스들을 기능별로 분류하기위해 @ 을 추가함
@@ -156,6 +159,68 @@ public class MemberController {
 	// = new BCryptPasswordEncoder(); -> root-context.xml에 bean 등록
 	
 // ** ID 중복확인
+	
+	
+	
+	
+	
+	
+	
+	
+	@GetMapping("mCheckList")
+	public String mCheckList(Model model, SearchCriteria cri, PageMaker pageMaker) {
+		
+		
+		String uri = "member/mPageList";
+		// 1) Criteria 처리
+		cri.setSnoEno();
+		
+		// 2) Service
+	    // => check 의 값을 선택하지 않은경우 check 값을 null 로 확실하게 해줘야함.
+	    //    mapper 에서 명확하게 구분할수 있도록해야 정확한 저리가능
+		if (cri.getCheck() != null && cri.getCheck().length < 1) {
+			cri.setCheck(null);
+			// 체크박스에서 어떤것도 선택하지 않았는데
+			
+		}
+		model.addAttribute("banana", service.mCheckList(cri));
+		
+		// 3) View처리 : PageMaker 이용
+		pageMaker.setCri(cri);
+		pageMaker.setTotalRowsCount(service.mCheckRowsCount(cri));
+		model.addAttribute("pageMaker", pageMaker);
+		
+		return uri;
+	} //bPageList
+	
+	@GetMapping("/mPageList")
+	public void bPageList(Model model,HttpServletRequest request, SearchCriteria cri, PageMaker pageMaker) {
+							
+		// 1) Criteria 처리
+		// => ver01 : currPage, rowsPerPage 값들은 Parameter 로 전달되어 자동으로 cri에 set
+		// => ver02 : ver01 + searchType, keyword 도 동일하게 cri에 set
+		cri.setSnoEno();
+		
+		
+		String mappingName = request.getRequestURI().substring(request.getRequestURI().lastIndexOf("/")+1);
+        pageMaker.setMappingName(mappingName);
+		// 2) Service
+		// => 출력 대상 Rows 를 select 
+		// => ver01, 02 모두 같은 Service메서드 사용,
+		// 	  mapper interface 에서 사용하는 sql 구문만 교체
+		//    즉, BoardMapper.xml 에 새로운 sql 구문 2개 추가
+		//		 BoardMapper.java interface 수정
+		model.addAttribute("banana", service.mSearchList(cri));
+		
+		// 3) View처리 : PageMaker 이용
+		// => cri, totalRowsCount (Read from DB)
+		pageMaker.setCri(cri);
+		pageMaker.setTotalRowsCount(service.mTotalRowsCount(cri));
+		model.addAttribute("pageMaker", pageMaker);
+		
+	} //bPageList
+	
+	
 	@GetMapping("/idDupCheck")
 	public void idDupCheck(@RequestParam("id") String id, Model model) {
 		//1) newID 존재여부 확인 & 결과 처리

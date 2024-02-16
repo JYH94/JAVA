@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.ncs.spring02.domain.MemberDTO;
 
 import mapperInterface.MemberMapper;
+import pageTest.SearchCriteria;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -41,6 +42,36 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
 	MemberMapper mapper;
+	
+	@Override
+	public List<MemberDTO> mSearchList(SearchCriteria cri) {
+		return mapper.mSearchList(cri);
+	}
+	
+	
+	@Override
+	public int mSearchRowsCount(SearchCriteria cri) {
+		return mapper.mSearchRowsCount(cri);
+	}
+	
+	@Override
+	public List<MemberDTO> mPageList(SearchCriteria cri) {
+		return mapper.mPageList(cri);
+	}
+	
+	@Override
+	public int mTotalRowsCount(SearchCriteria cri) {
+		return mapper.mTotalRowsCount(cri);
+	}
+	
+	public List<MemberDTO> mCheckList(SearchCriteria cri) {
+		return mapper.mCheckList(null);
+		
+	}
+	public int mCheckRowsCount(SearchCriteria cri) {
+		return mapper.mCheckRowsCount(cri);
+	}
+	
 	
 	//** selectList
 	public List<MemberDTO> selectList(){

@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.ncs.spring02.domain.MemberDTO;
 
+import pageTest.SearchCriteria;
+
 public interface MemberMapper {
 	//** 전역변수 정의
 	//@Autowired
@@ -29,6 +31,16 @@ public interface MemberMapper {
 	//=> SQL 구문 : xml 로작성 -> 이 화일을 Mapper 라 함 
 	//=> Mapper 작성규칙
 	//   -> mapperInterface 와 패키지명, 화일명이 동일해야함
+	
+	public List<MemberDTO> mSearchList(SearchCriteria cri);
+	public int mSearchRowsCount(SearchCriteria cri);
+	
+	public List<MemberDTO> mPageList(SearchCriteria cri) ;
+	public int mTotalRowsCount(SearchCriteria cri) ;
+	
+	
+		public List<MemberDTO> mCheckList(SearchCriteria cri);
+		public int mCheckRowsCount(SearchCriteria cri);
 	
 		//** selectList
 		public List<MemberDTO> selectList();
