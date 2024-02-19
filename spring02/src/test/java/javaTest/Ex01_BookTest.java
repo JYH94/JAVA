@@ -1,13 +1,11 @@
 package javaTest;
 
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-
-
 
 // ** Book class
 // => 멤버필드를 3개(author, title, price) 정의, 이들을 모두 초기화하는 생성자 만들기

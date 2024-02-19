@@ -2,6 +2,9 @@ package mapperInterface;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
 import com.ncs.spring02.domain.MemberDTO;
 
 import pageTest.SearchCriteria;
@@ -32,6 +35,18 @@ public interface MemberMapper {
 	//=> Mapper 작성규칙
 	//   -> mapperInterface 와 패키지명, 화일명이 동일해야함
 	
+	//** JUnit Test
+	// => selectDTO
+	@Select("select * from member where id=#{id}")
+	MemberDTO selectDTO(MemberDTO dto);
+
+	
+	// => @Param 적용 Test
+	//    -> 기본규칙: Mybatis 에서는 매개변수 Type은 무관하지만, 갯수는 1개만 허용
+	//   -> @Param: mapper 에서 #{...} 적용, 복수갯수 사용 가능 (단, 기본자료형 사용불가_JUnit 에서는 가능 
+	@Select("select * from member where id=#{ii} and jno=#{jno}")
+	MemberDTO selectParam(@Param("ii")String id, @Param("jno")int jno);
+	
 	public List<MemberDTO> mSearchList(SearchCriteria cri);
 	public int mSearchRowsCount(SearchCriteria cri);
 	
@@ -39,28 +54,30 @@ public interface MemberMapper {
 	public int mTotalRowsCount(SearchCriteria cri) ;
 	
 	
-		public List<MemberDTO> mCheckList(SearchCriteria cri);
-		public int mCheckRowsCount(SearchCriteria cri);
-	
-		//** selectList
-		public List<MemberDTO> selectList();
-		
-		//** selectOne
-		public MemberDTO selectOne(String id);
-		
-		//** insert
-		public int insert(MemberDTO dto);
-		
-		//** update
-		public int update(MemberDTO dto);
-		
-		//** Password_Update
-		public int pwUpdate(MemberDTO dto);
-		
-		//** delete
-		public int delete(String id);
+	public List<MemberDTO> mCheckList(SearchCriteria cri);
+	public int mCheckRowsCount(SearchCriteria cri);
 
-		public List<MemberDTO> selectJoList(String jno);
+	//** selectList
+	public List<MemberDTO> selectList();
+	
+	//** selectOne
+	public MemberDTO selectOne(String id);
+	
+	//** insert
+	public int insert(MemberDTO dto);
+	
+	//** update
+	public int update(MemberDTO dto);
+	
+	//** Password_Update
+	public int pwUpdate(MemberDTO dto);
+	
+	//** delete
+	public int delete(String id);
+
+	public List<MemberDTO> selectJoList(String jno);
+
+
 		
 //		** selectJoList
 //		public List<MemberDTO> selectJoList(String jno);
