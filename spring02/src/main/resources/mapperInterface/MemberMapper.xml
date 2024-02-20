@@ -6,6 +6,12 @@
 <!-- ** Member Check_List 
 	=> check 조건 선택한 경우: ~~~ where jno in(1,5,7) 
 -->
+
+	<select id="mTotalRowsCount" resultType="int">
+		select count(*) from member
+	</select>
+
+	
 	<select id="mCheckList" resultType="com.ncs.spring02.domain.MemberDTO">
 		select * from member
 		<if test="check!=null">
@@ -15,7 +21,7 @@
 			</foreach>
 		</if>
 		order by jno
-		limit #{sno}, #{rowsPerPage} 
+		limit #{sno}, #{rowsPerPage}
 	</select>
 	
 	<select id="mCheckRowsCount" resultType="int">

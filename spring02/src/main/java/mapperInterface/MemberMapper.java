@@ -53,7 +53,6 @@ public interface MemberMapper {
 	public List<MemberDTO> mPageList(SearchCriteria cri) ;
 	public int mTotalRowsCount(SearchCriteria cri) ;
 	
-	
 	public List<MemberDTO> mCheckList(SearchCriteria cri);
 	public int mCheckRowsCount(SearchCriteria cri);
 

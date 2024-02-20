@@ -48,6 +48,14 @@
 <br>
 &nbsp;<a href ="board/bPageList">BPage</a>&nbsp;
 &nbsp;<a href ="member/mPageList">MPage</a>&nbsp;
-
+<br>
+&nbsp;<a href ="etest">Exception</a>&nbsp;
+<br>
+&nbsp;<a href ="member/log4jTest">Log4j Test</a>&nbsp;
+<br><hr>
+&nbsp;<a href="greensn">GreenSN</a>&nbsp;
+&nbsp;<a href="greenall">GreenALL</a>&nbsp;
+&nbsp;<a href="jeju">JeJu</a>&nbsp;
+&nbsp;<a href="gps">GPS</a>&nbsp;
 </body>
 </html>

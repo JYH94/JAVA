@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aop-reference-model>
 <aop-project name="Test01"/>
-<aop-project name="spring01"/>
 <aop-project name="spring02"/>
+<aop-project name="spring01">
+<aspect-definition advice-class-name="aop02.MyAspect" advice-method-name="myAround" advice-type="AROUND" aspect-end-line-number="21" aspect-name="myAsp" aspect-start-line-number="21" factory-id="org.springframework.ide.eclipse.aop.core.beanAspectDefinitionElementFactory" file="/spring01/src/main/resources/aop02.xml" pointcut-expression="execution(void doStudying())" proxy-target-class="false">
+<aop-reference advice-type="AROUND" bean="1:BeansModel|2:spring01|3:src/main/resources/aop02.xml|7:beans:6|8:boy:9" bean-file="/spring01/src/main/resources/aop02.xml" bean-start-line="9" factory-id="org.springframework.ide.eclipse.aop.core.aopReferenceElementFactory" file="/spring01/src/main/resources/aop02.xml" source="=spring01/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;aop02{MyAspect.java[MyAspect~myAround~QProceedingJoinPoint;" source-start-line="9" target="=spring01/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;aop02{Boy.java[Boy~doStudying" target-start-line="5"/>
+<aop-reference advice-type="AROUND" bean="1:BeansModel|2:spring01|3:src/main/resources/aop02.xml|7:beans:6|8:girl:10" bean-file="/spring01/src/main/resources/aop02.xml" bean-start-line="10" factory-id="org.springframework.ide.eclipse.aop.core.aopReferenceElementFactory" file="/spring01/src/main/resources/aop02.xml" source="=spring01/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;aop02{MyAspect.java[MyAspect~myAround~QProceedingJoinPoint;" source-start-line="9" target="=spring01/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;aop02{Girl.java[Girl~doStudying" target-start-line="5"/>
+</aspect-definition>
+</aop-project>
 </aop-reference-model>

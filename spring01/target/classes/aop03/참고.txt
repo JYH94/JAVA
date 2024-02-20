@@ -1,0 +1,2 @@
+aop02 에서 구현한 myAround 에서 before/after/ .... 기능을
+각각 다른 메서드로 분리시킨 경우 xml 작성방법

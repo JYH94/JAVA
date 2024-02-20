@@ -111,7 +111,6 @@ function checkClear() {
           <c:set var="ck3" value="false" />
           <c:set var="ck4" value="false" />
           <c:set var="ck5" value="false" />
-          <c:set var="ck6" value="false" />
       <c:forEach  var="id" items="${pageMaker.cri.check}" >
          <c:if test="${jno=='1'}"> <c:set var="ck1" value="true" /> </c:if>
          <c:if test="${jno=='2'}"> <c:set var="ck2" value="true" /> </c:if>

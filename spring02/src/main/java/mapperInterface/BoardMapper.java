@@ -9,6 +9,11 @@ import pageTest.SearchCriteria;
 
 public interface BoardMapper {
 	
+	
+	
+	
+	
+	
 	// ** Board_Check_list
 	public List<BoardDTO> bCheckList(SearchCriteria cri) ;
 	public int bCheckRowsCount(SearchCriteria cri) ;
@@ -22,6 +27,8 @@ public interface BoardMapper {
 	//** Board_Paging
 	public List<BoardDTO> bPageList(Criteria cri) ;
 	public int totalRowsCount(Criteria cri) ;
+
+	public int mTotalRowsCount(Criteria cri) ;
 	
 	
 	// List
