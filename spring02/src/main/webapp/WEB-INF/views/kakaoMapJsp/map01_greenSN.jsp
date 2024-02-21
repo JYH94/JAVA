@@ -19,7 +19,7 @@
 
 => 회원가입(kakao 계정으로 kakao developers 에 가입), 로그인, 앱 만들기 , 
    -> 앱키 받고 (Javascript 키 copy 하기) , 
-   -> 플랫폼 등록 (왼편메뉴의 앱키 아랫쪽에 있음 : http://localhost:8080 )
+   -> 플랫폼 등록 ( 왼편메뉴의 앱키 아랫쪽에 있음 : http://localhost:8080 )
 => Javascript 키 : 677cb2eb295bf476d46f1a1d3849f06d (적용)
 
 => http://apis.map.kakao.com/web/sample/ 
