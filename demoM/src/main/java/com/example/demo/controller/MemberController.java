@@ -38,7 +38,13 @@ public class MemberController {
 	MemberService service;
 	PasswordEncoder passwordEncoder;  // DemoConfig 에서 설정
 	
-// ** ID 중복확인
+	
+	@GetMapping(value="/aximlist")
+	public String aximlist(Model model) {
+		model.addAttribute("apple",service.selectList());
+		return "axTest/axMemberList";
+	}
+	
 	
 	// ** Lombok @log4j Test
 	@GetMapping("/log4jTest")

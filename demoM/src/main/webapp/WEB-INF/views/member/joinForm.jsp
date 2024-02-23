@@ -75,7 +75,7 @@ onload=function(){
 	// => window.onload : window는 생략가능
     // => body의 Tag들을 인식가능한 상태일때 실행 되도록하기위함
 	
-	//=> ID
+	// => ID
     // -> keydown_EnterKey에 포커스이동 적용
     // -> 제어문자의 ascii 코드 값(참고)
     //    esc=27, EnterKey=13, Space_Bar=32
@@ -235,7 +235,7 @@ function inCheck(){
 -->
 
 
-<form action="join" method="post" enctype="multipart/form-data">
+<form action="join" id="myform" method="post" enctype="multipart/form-data">
 <table>
 	<tr height="20">
 		<td bgcolor="MediumPurple"><label for="id">I  D</label></td>
@@ -335,7 +335,9 @@ function inCheck(){
 	             	  ** Enter_Key : form 내부에서는 누르면 submit이 진행됨
 	             -->
              	  
-			<input type="reset" value="취소">
+			<input type="reset" value="취소">&nbsp;&nbsp;
+			<!-- Axios Join Test -->
+			<span class='textlink' onclick='axiJoin()'>axiJoin</span>
 		</td>
 	</tr>
 </table>
