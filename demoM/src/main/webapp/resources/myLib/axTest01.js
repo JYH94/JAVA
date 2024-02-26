@@ -24,6 +24,8 @@
  */
 
 
+let div = document.createElement('div');
+
 
 function rsLoginf() {
 	// Test1) rsLogin

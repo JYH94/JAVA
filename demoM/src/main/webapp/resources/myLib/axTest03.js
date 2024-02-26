@@ -53,8 +53,8 @@ function axiMListCheck() {
 		if (checkAll[i].checked)
 			checkData += "&check=" + checkAll[i].value;
 	}
-	
-	
+
+
 	let url = 'axmcheck'
 		+ '?currPage=1&rowsPerPage=5'
 		+ checkData;
@@ -101,15 +101,15 @@ function axiMList() {
 //    실패 : Area2 번 clear , 에러메세지 출력
 function idbList(id) {
 	let url = "rest/idblist/" + id;
-	
+
 	axios.get(url)
-	.then(response => {
-		alert("** 성공 => resultArea2 에 리스트 작성 **");
-		/*document.getElementById('resultArea2').innerHTML = response.data;*/
-		let listData = response.data;
-		console.log("** result List_Data => " + listData)
-		let resultHtml = 
-		`
+		.then(response => {
+			alert("** 성공 => resultArea2 에 리스트 작성 **");
+			/*document.getElementById('resultArea2').innerHTML = response.data;*/
+			let listData = response.data;
+			console.log("** result List_Data => " + listData)
+			let resultHtml =
+				`
 		<table style="width: 100%">
 			<tr bgcolor="Khaki">
 				<th>seq</th>
@@ -119,10 +119,10 @@ function idbList(id) {
 				<th>조회수!</th>
 			</tr>
 		`;
-		// => 반복문 적용
-		for (let b of listData) {
-			resultHtml += 
-				`
+			// => 반복문 적용
+			for (let b of listData) {
+				resultHtml +=
+					`
 				<tr>
 					<td>${b.seq}</td>
 					<td>${b.id}</td>
@@ -131,22 +131,22 @@ function idbList(id) {
 					<td>${b.cnt}</td>
 				</tr>
 				`
-		}
-		
-		resultHtml += `</table>`;
-		document.getElementById('resultArea2').innerHTML = resultHtml;
-	}).catch(err => {
-		// => response 의 status의 값이 502 일 때 , => "데이터가 없습니다"
-		if (err.response.status == '502') {
-		alert("** 출력할 데이터가 없다");
-		document.getElementById('resultArea2').innerHTML 
-											= err.response.data;
-		} else {
-		alert("** 시스템 오류, 잠시 후 다시! => " +  err.message);
-		document.getElementById('resultArea2').innerHTML = "";
-		}
-	})
-	
+			}
+
+			resultHtml += `</table>`;
+			document.getElementById('resultArea2').innerHTML = resultHtml;
+		}).catch(err => {
+			// => response 의 status의 값이 502 일 때 , => "데이터가 없습니다"
+			if (err.response.status == '502') {
+				alert("** 출력할 데이터가 없다");
+				document.getElementById('resultArea2').innerHTML
+					= err.response.data;
+			} else {
+				alert("** 시스템 오류, 잠시 후 다시! => " + err.message);
+				document.getElementById('resultArea2').innerHTML = "";
+			}
+		})
+
 }
 
 /* Delete 기능 추가 */
@@ -156,25 +156,50 @@ function idbList(id) {
 // => 성공 : Deleted 로 변경, onclick 이벤트 해제
 //
 function axiDelete(id, ele) {
-	let url = "/rest/axidelete/"+id;
+	let url = "/rest/axidelete/" + id;
 	axios.delete(url)
-	.then(response => {
-		alert("데이터 삭제 O" + response.data)
-		if(response.data > 0) {
-			ele.closest('tr').style.color = "gray";
-			ele.style.color="gray";
-			ele.removeAttribute('onclick');
-			ele.removeAttribute('class');
-		}
-		// => 삭제성공
-		//	  Delete -> Deleted / color=gray, bold / onclick 이벤트 해제
-		//    Style 제거
-	}).catch(err => {
-		if (err.response.status == '502') {
-			alert("데이터 삭제 X" + err.response.data);
-		} else {
-			alert("시스템 오류! 다시 시도하세요" + err.message);
-		}
-	})
+		.then(response => {
+			alert("데이터 삭제 O" + response.data)
+			if (response.data > 0) {
+				ele.closest('tr').style.color = "gray";
+				ele.style.color = "gray";
+				ele.removeAttribute('onclick');
+				ele.removeAttribute('class');
+			}
+			// => 삭제성공
+			//	  Delete -> Deleted / color=gray, bold / onclick 이벤트 해제
+			//    Style 제거
+		}).catch(err => {
+			if (err.response.status == '502') {
+				alert("데이터 삭제 X" + err.response.data);
+			} else {
+				alert("시스템 오류! 다시 시도하세요" + err.message);
+			}
+		})
 }
 
+
+function mouseOver(event, jno) {
+
+	let url = '/rest/mover/' + jno;
+
+	axios.get(url)
+		.then(response => {
+			let box = document.createElement('div');
+			document.getElementById('mBox').appendChild(box);
+			box.style.position = 'absolute';
+			box.style.left = event.pageX+'px';
+			box.style.top = event.pageY+'px';
+			box.style.width = '200px';
+			box.style.height = '100px';
+			box.style.border = '2px solid';
+			box.style.backgroundColor='aqua';
+			box.innerText = response.data.slogan;
+		}).catch(err => {
+			alert(err.message);
+		})
+}
+
+function mouseLeave() {
+	document.getElementById('mBox').innerHTML="";
+}

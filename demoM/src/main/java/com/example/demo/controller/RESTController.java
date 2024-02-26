@@ -140,6 +140,21 @@ public class RESTController {
 	PasswordEncoder passwordEncoder; // DemoConfig 에 생성 설정해둠
 
 	
+	@GetMapping("mover/{jno}")
+	public ResponseEntity<?> mOver(@PathVariable("jno")String jno) {
+		
+		ResponseEntity<?> result = null;
+		JoDTO dto = jservice.selectJoDetail(jno);
+		
+		if(dto != null) {
+			result = ResponseEntity.status(HttpStatus.OK).body(dto);
+		} else {
+			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("속한 조가 없다");
+		}
+		
+		return result;
+		
+	}
 	
 	@DeleteMapping("/axidelete/{id}")
 	public int axidelete(@PathVariable("id") String id) {

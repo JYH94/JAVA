@@ -13,6 +13,7 @@
 <c:if test="${!empty requestScope.message}">
 => ${requestScope.message}<br><hr>
 </c:if>
+<div id="mBox"></div>
 <table border="1" sytle="width:100%">
 <tr bgcolor="hotpink">
 	<th>ID</th><!-- <th>Password</th> --><th>Name</th><th>Age</th><th>Jno</th>
@@ -20,10 +21,10 @@
 </tr>
 <c:if test="${!empty requestScope.apple}">
 	<c:forEach var="v" items="${requestScope.apple}">
-		<tr><td><span class="textlink" onclick=idbList('${v.id}')>${v.id}</span></td><%-- <td>${v.password}</td> --%><td>${v.name}</td><td>${v.age}</td><td>${v.jno}</td>
-		<td>${v.info}</td><td>${v.point}</td><td>${v.birthday}</td><td>${v.rid}</td>
-		<td><img alt="myImage" src="/resources/images/${v.uploadfile}" width="50" height="50"></td>
-		<td><span class="textlink" onclick="axiDelete('${v.id}',this)">삭제</span><td>
+		<tr><td><span class="textlink" onclick=idbList('${v.id}')>${v.id}</span></td><%-- <td>${v.password}</td> --%><td>${v.name}</td><td>${v.age}</td><td onmouseleave="mouseLeave()" onmouseover="mouseOver(event,'${v.jno}')">${v.jno}</td>
+			<td>${v.info}</td><td>${v.point}</td><td>${v.birthday}</td><td>${v.rid}</td>
+			<td><img alt="myImage" src="/resources/images/${v.uploadfile}" width="50" height="50"></td>
+			<td><span class="textlink" onclick="axiDelete('${v.id}',this)">삭제</span><td>
 		</tr>
 	</c:forEach>
 </c:if>
