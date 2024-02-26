@@ -16,19 +16,20 @@
 <table border="1" sytle="width:100%">
 <tr bgcolor="hotpink">
 	<th>ID</th><!-- <th>Password</th> --><th>Name</th><th>Age</th><th>Jno</th>
-	<th>Info</th><th>Point</th><th>Birthday</th><th>추천인</th><th>Image</th>				
+	<th>Info</th><th>Point</th><th>Birthday</th><th>추천인</th><th>Image</th><th>Delete</th>				
 </tr>
 <c:if test="${!empty requestScope.apple}">
 	<c:forEach var="v" items="${requestScope.apple}">
-		<tr><td onclick="axiMBlist(this)">${v.id}</td><%-- <td>${v.password}</td> --%><td>${v.name}</td><td>${v.age}</td><td>${v.jno}</td>
+		<tr><td><span class="textlink" onclick=idbList('${v.id}')>${v.id}</span></td><%-- <td>${v.password}</td> --%><td>${v.name}</td><td>${v.age}</td><td>${v.jno}</td>
 		<td>${v.info}</td><td>${v.point}</td><td>${v.birthday}</td><td>${v.rid}</td>
 		<td><img alt="myImage" src="/resources/images/${v.uploadfile}" width="50" height="50"></td>
+		<td><span class="textlink" onclick="axiDelete('${v.id}',this)">삭제</span><td>
 		</tr>
 	</c:forEach>
 </c:if>
 <c:if test="${empty requestScope.apple}">
 	<tr>
-	<td colspan="9">~~ 출력 자료가 1건도 없습니다 .~~</td>
+	<td colspan="10">~~ 출력 자료가 1건도 없습니다 .~~</td>
 	</tr>
 </c:if>
 <c:if test="${!empty requestScope.message}">

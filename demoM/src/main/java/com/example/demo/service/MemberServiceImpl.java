@@ -65,7 +65,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	public List<MemberDTO> mCheckList(SearchCriteria cri) {
-		return mapper.mCheckList(null);
+		return mapper.mCheckList(cri);
 		
 	}
 	public int mCheckRowsCount(SearchCriteria cri) {

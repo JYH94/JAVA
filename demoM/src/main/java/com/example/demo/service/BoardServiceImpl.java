@@ -17,6 +17,10 @@ public class BoardServiceImpl implements BoardService {
 	BoardMapper mapper;
 	
 	
+	public List<BoardDTO> idbList(String id) {
+		return mapper.idbList(id);
+	}
+	
 	@Override
 	public List<BoardDTO> bCheckList(SearchCriteria cri) {
 		return mapper.bCheckList(cri);

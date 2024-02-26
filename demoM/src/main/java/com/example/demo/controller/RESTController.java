@@ -1,17 +1,19 @@
 package com.example.demo.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,14 +22,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.domain.BoardDTO;
 import com.example.demo.domain.JoDTO;
 import com.example.demo.domain.MemberDTO;
 import com.example.demo.domain.UserDTO;
+import com.example.demo.service.BoardService;
 import com.example.demo.service.JoService;
 import com.example.demo.service.MemberService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import pageTest.SearchCriteria;
 
 //** @RestController
 //=> 스프링4 부터 추가됨,
@@ -131,7 +136,38 @@ public class RESTController {
 
 	MemberService service;
 	JoService jservice;
+	BoardService bService;
 	PasswordEncoder passwordEncoder; // DemoConfig 에 생성 설정해둠
+
+	
+	
+	@DeleteMapping("/axidelete/{id}")
+	public int axidelete(@PathVariable("id") String id) {
+		if( service.delete(id) > 0) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+	
+	
+	@GetMapping("/idblist/{id}")
+	public ResponseEntity<?> idblist(@PathVariable("id") String id) {
+
+		ResponseEntity<?> result = null;
+		List<BoardDTO> list = bService.idbList(id);
+
+		// 출력할 데이터 유무 체크
+		if (list != null && list.size() > 0) {
+			result = ResponseEntity.status(HttpStatus.OK).body(list);
+			log.info("** httpStatus.OK "+HttpStatus.OK);
+		} else {
+			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("~~자료가 없습니다~!!~");
+			log.info("** httpStatus.BAD_GATEWAY "+HttpStatus.BAD_GATEWAY);
+		}
+
+		return result;
+	}
 
 	// => 메뉴없이 직접 요청 : http://localhost:8080/spring02/rest/hello
 	// => return 한 String 값이 response 에 담겨져 전송되어 출력됨
@@ -343,7 +379,7 @@ public class RESTController {
 	// 나가는 데이터를 제한할때 produces (위에서는 String을 Return 함을 강제함)
 	// => consumes를 설정하면 Request Header에 보내는 Data가 JSON 임을 명시해야함.
 	// => @RequestBody : Json -> Java 객체로 파싱
-	
+
 	// 2) login2
 	// => request : json response : json
 	// => UserDTO 사용 , login 정보를 dto객체에 담아서 전송
@@ -370,15 +406,13 @@ public class RESTController {
 		return result;
 	}
 
-	
-    // 3) Join
-    // => image 포함, "multipart/form-data" Type 으로 요청
-    // => consumes, produces 설정
-    // => FormData 형식으로 전달된 Data 는 JSON Format이 아니므로
-    //    @RequestBody 필요없음 (Spring 이 자동으로 담아줌)  
+	// 3) Join
+	// => image 포함, "multipart/form-data" Type 으로 요청
+	// => consumes, produces 설정
+	// => FormData 형식으로 전달된 Data 는 JSON Format이 아니므로
+	// @RequestBody 필요없음 (Spring 이 자동으로 담아줌)
 	@PostMapping(value = "/rsjoin", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<?> rsjoin( MemberDTO dto) 
-					throws Exception {
+	public ResponseEntity<?> rsjoin(MemberDTO dto) throws Exception {
 		System.out.println("aa");
 
 		ResponseEntity<String> result = null;
@@ -399,58 +433,54 @@ public class RESTController {
 			file2 = uploadfilef.getOriginalFilename();
 		}
 		dto.setUploadfile(file2);
-		//====================================================================
-		//2. Service & 결과
-		//=> passwordEncoder 적용
-		dto.setPassword(passwordEncoder.encode(dto.getPassword()));	
-		// => 
-		
-		if(service.insert(dto) > 0) {	
-			//성공시
-			result = ResponseEntity.status(HttpStatus.OK)
-					.body("성공! 로그인 후 이용하세요");
+		// ====================================================================
+		// 2. Service & 결과
+		// => passwordEncoder 적용
+		dto.setPassword(passwordEncoder.encode(dto.getPassword()));
+		// =>
+
+		if (service.insert(dto) > 0) {
+			// 성공시
+			result = ResponseEntity.status(HttpStatus.OK).body("성공! 로그인 후 이용하세요");
 			log.info("** rsLogin HttpStatus.OK => " + HttpStatus.OK);
-		}else {
-			//실패시
-			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY)
-					.body("실패 !! 다시 가입 하세요");
+		} else {
+			// 실패시
+			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("실패 !! 다시 가입 하세요");
 			log.info("** rsLogin HttpStatus.BAD_GATEWAY => " + HttpStatus.BAD_GATEWAY);
 		}
-		
+
 		return result;
 	}
 
-	
-   
 	// 2) login2
-    // => requeset : JSON , response : JSON
-    // => UserDTO 사용, login 정보를 담아서 전송
-    @PostMapping(value = "/rsloginjj", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> rsloginjj(HttpSession session, @RequestBody MemberDTO dto) {
-        ResponseEntity<UserDTO> result = null;
-        // 1) password 보관
-        String password = dto.getPassword();
+	// => requeset : JSON , response : JSON
+	// => UserDTO 사용, login 정보를 담아서 전송
+	@PostMapping(value = "/rsloginjj", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> rsloginjj(HttpSession session, @RequestBody MemberDTO dto) {
+		ResponseEntity<UserDTO> result = null;
+		// 1) password 보관
+		String password = dto.getPassword();
 
-        // 2) Service 처리
-        dto = service.selectOne(dto.getId());
+		// 2) Service 처리
+		dto = service.selectOne(dto.getId());
 
-        if (dto != null && passwordEncoder.matches(password, dto.getPassword())) {
-            session.setAttribute("loginID", dto.getId());
-            session.setAttribute("loginName", dto.getName());
+		if (dto != null && passwordEncoder.matches(password, dto.getPassword())) {
+			session.setAttribute("loginID", dto.getId());
+			session.setAttribute("loginName", dto.getName());
 
-            // => response 로 전송할 객체생성
-            // UserDTO, 빌더 패턴 적용
-            // UserDTO 의 값 변경을 예방하기위해 final 을 사용하기도 함.
-            final UserDTO userDTO = UserDTO.builder().id(dto.getId()).username(dto.getName()).build();
+			// => response 로 전송할 객체생성
+			// UserDTO, 빌더 패턴 적용
+			// UserDTO 의 값 변경을 예방하기위해 final 을 사용하기도 함.
+			final UserDTO userDTO = UserDTO.builder().id(dto.getId()).username(dto.getName()).build();
 
-            result = ResponseEntity.status(HttpStatus.OK).body(userDTO);
-            log.info("** rsLogin 성공 : " + HttpStatus.OK);
-        } else {
-            result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(null);
-            log.info("** rsLogin 실패 : " + HttpStatus.BAD_GATEWAY);
+			result = ResponseEntity.status(HttpStatus.OK).body(userDTO);
+			log.info("** rsLogin 성공 : " + HttpStatus.OK);
+		} else {
+			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(null);
+			log.info("** rsLogin 실패 : " + HttpStatus.BAD_GATEWAY);
 
-        }
-        return result;
-    }
+		}
+		return result;
+	}
 
 } // class

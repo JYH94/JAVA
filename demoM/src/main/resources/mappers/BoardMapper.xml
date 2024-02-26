@@ -80,6 +80,9 @@
 	~ ,id, DATE_FORMAT(regdate, '%Y-%m-%d %H:%i:%s') regdate, ~~
 	~ ,id, DATE_FORMAT(regdate, '%Y년 %m월 %d일 %H시 %i분 %s초') regdate, ~~ 	
 -->
+
+
+
 	<select id="bCheckList" resultType="com.example.demo.domain.BoardDTO">
 		select seq, id, title, 
 			   DATE_FORMAT(regdate, '%Y년 %m월 %d일 %H시 %i분 %s초') regdate, 

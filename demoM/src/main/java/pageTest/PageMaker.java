@@ -158,7 +158,7 @@ public class PageMaker {
 				.queryParam("keyword", cri.getKeyword())
 				.queryParams(checkMap)
 				.build();
-		return uriComponents.toString();
+		return mappingName+uriComponents.toString();
 	}
 
 } //class

@@ -7,6 +7,18 @@
 	=> check 조건 선택한 경우: ~~~ where jno in(1,5,7) 
 -->
 
+<!-- Member Paging -->
+    <select id="mPageList" resultType="com.example.demo.domain.MemberDTO">
+        select * from member
+        order by id
+        limit #{sno}, #{rowsPerPage}
+    </select>
+
+    <select id="totalRowsCount" resultType="int">
+        select count(*) from member
+    </select>
+
+
 	<select id="mTotalRowsCount" resultType="int">
 		select count(*) from member
 	</select>
