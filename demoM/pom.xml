@@ -39,7 +39,7 @@
 			<scope>test</scope>
 		</dependency>
 		
-		      <!-- *** JSP 사용을 위한 Tomcat JSP엔진 추가 -->
+	 <!-- *** JSP 사용을 위한 Tomcat JSP엔진 추가 -->
       <dependency>
          <groupId>org.apache.tomcat.embed</groupId>
          <artifactId>tomcat-embed-jasper</artifactId>

@@ -153,7 +153,6 @@ public class RESTController {
 		}
 		
 		return result;
-		
 	}
 	
 	@DeleteMapping("/axidelete/{id}")
