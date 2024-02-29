@@ -36,10 +36,10 @@
 <c:if test="${!empty sessionScope.loginID}">
 	&nbsp;<a href="member/detail?jCode=D">내정보</a>&nbsp;
 	&nbsp;<a href="member/detail?jCode=U">내정보수정</a>&nbsp;
-	&nbsp;<a href="member/mjoinList">mJoinList</a>&nbsp;
 	&nbsp;<a href="member/logout">Logout</a>&nbsp;
 	&nbsp;<a href="member/delete">탈퇴</a>&nbsp;
 </c:if>
+	&nbsp;<a href="member/mjoinList">mJoinList</a>&nbsp;
 <br><hr>
 &nbsp;<a href ="member/memberList">MList</a>&nbsp;
 &nbsp;<a href ="jo/joList">JList</a>&nbsp;
