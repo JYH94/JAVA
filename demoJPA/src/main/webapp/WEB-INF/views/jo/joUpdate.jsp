@@ -9,16 +9,16 @@
 </head>
 <body>
 <h2>** Jo Update Form **</h2>
-<form action="Update">
+<form action="update" method="get">
 <table>
 	<tr height="20">
 		<td bgcolor="MediumPurple"><label for="jno">Jno</label></td>
 		<td><select name="jno" id="jno">
-			<option value="1">1조: Business</option>
-			<option value="2">2조: static</option>
-			<option value="3">3조: 칭찬해조</option>
-			<option value="4">4조: 카톡으로얘기하조</option>
-			<option value="7">7조: 칠면조(관리팀)</option>
+			<option value="1" ${apple.jno == 1 ? 'selected' : ''}>1조: Business</option>
+			<option value="2" ${apple.jno == 2 ? 'selected' : ''}>2조: static</option>
+			<option value="3" ${apple.jno == 3 ? 'selected' : ''}>3조: 칭찬해조</option>
+			<option value="4" ${apple.jno == 4 ? 'selected' : ''}>4조: 카톡으로얘기하조</option>
+			<option value="7" ${apple.jno == 7 ? 'selected' : ''}>7조: 칠면조(관리팀)</option>
 			</select>
 		</td>
 	</tr>

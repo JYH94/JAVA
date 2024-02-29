@@ -7,7 +7,6 @@ import org.springframework.data.domain.Sort;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 //** JPA Paging & Sort
 //=> https://bnzn2426.tistory.com/135

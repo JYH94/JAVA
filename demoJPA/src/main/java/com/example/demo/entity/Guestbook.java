@@ -22,8 +22,11 @@ import lombok.ToString;
 @AllArgsConstructor
 public class Guestbook extends BaseEntity {
 	
+	
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // Auto_increment
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	// Auto_increment(sql) 할 대상에게 주는 애노테이션
 	private Long gno; // Auto_increment 할 대상은 Long로 설정
 	
 	@Column(length = 100, nullable = false)

@@ -8,7 +8,6 @@ import java.util.stream.IntStream;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import lombok.Builder;
 import lombok.Data;
 
 // 페이징 결과를 나타내는 dto

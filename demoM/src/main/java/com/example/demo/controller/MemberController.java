@@ -38,8 +38,6 @@ public class MemberController {
 	MemberService service;
 	PasswordEncoder passwordEncoder;  // DemoConfig 에서 설정
 	
-	
-	
 	// ** Ajax Member_Paging
 	// => ver01 : "/axmcri" 만 구현 (Search 기능만 구현)
 	// => ver02 : "/axmcheck" 요청도 처리할 수 있도록 구현

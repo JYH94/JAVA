@@ -10,7 +10,7 @@
 <body>
 <h2>JO Insert Form</h2>
 
-<form action="Insert">
+<form action="insert" method="get">
 	Jno: <input type="text" name="jno" id="id"><br>
 	Jname: <input type="text" name="jname" id="jname"><br>
 	Captain: <input type="text" name="captain" id="captain"><br>

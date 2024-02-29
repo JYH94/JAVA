@@ -1,42 +1,47 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.domain.JoDTO;
+import com.example.demo.entity.Jo;
+import com.example.demo.repository.JoRepository;
 
-import mapperInterface.JoMapper;
+import lombok.RequiredArgsConstructor;
 
-//@Service
+@Service
+@RequiredArgsConstructor
 public class JoServiceImpl implements JoService{
 
 	//@Autowired
-	JoMapper mapper;
+	private final JoRepository repository;
 	
 	//**selectJoList
-	public List<JoDTO> selectJoList(){
-		return mapper.selectJoList();
+	public List<Jo> selectJoList(){
+		return repository.findAll();
 	}
 	
 	//**selectJoDetail
-	public JoDTO selectJoDetail(String jno) {
-		return mapper.selectJoDetail(jno);
+	public Jo selectJoDetail(int jno) {
+		Optional<Jo> result = repository.findById(jno); 
+		if(result.isPresent()) {
+			return result.get();
+		} else {
+			return null;
+		}
 	}
 	
-	//**insert
-	public int insert(JoDTO dto) {
-		return mapper.insert(dto);
+	//**insert & update
+	public Jo save(Jo entity) {
+		return repository.save(entity);
 	}
 	
-	//**update
-	public int update(JoDTO dto) {
-		return mapper.update(dto);
-	}
 	
 //	**delete
-	public int delete(String jno) {
-		return mapper.delete(jno);
+	public void delete(int jno) {
+		repository.deleteById(jno);
 	}
+
+
 }

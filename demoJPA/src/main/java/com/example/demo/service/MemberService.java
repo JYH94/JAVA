@@ -3,46 +3,32 @@ package com.example.demo.service;
 import java.util.List;
 
 import com.example.demo.domain.MemberDTO;
+import com.example.demo.entity.Member;
 
-import pageTest.SearchCriteria;
 
 public interface MemberService {
 
 	
-	
-	
-	
-	
-	public List<MemberDTO> mSearchList(SearchCriteria cri);
-	public int mSearchRowsCount(SearchCriteria cri);
-	
-	public List<MemberDTO> mCheckList(SearchCriteria cri);
-	public int mCheckRowsCount(SearchCriteria cri);
-	
-	
-	public List<MemberDTO> mPageList(SearchCriteria cri) ;
-	public int mTotalRowsCount(SearchCriteria cri) ;
-	
+	//** Password_Update
+	// => @Query 적용
+	public void updatePassword(String id, String password);
 	
 	//** selectList
-	public List<MemberDTO> selectList();
+	public List<Member> selectList();
 	
 	//** selectOne
-	public MemberDTO selectOne(String id);
+	public Member selectOne(String id);
 	
-	//** insert
-	public int insert(MemberDTO dto);
-	
-	//** update
-	public int update(MemberDTO dto);
-	
-	//** Password_Update
-	public int pwUpdate(MemberDTO dto);
+	//** insert & update
+	public Member save(Member entity);
 	
 	//** delete
-	public int delete(String id);
+	public void deleteById(String id);
 	
-	//** selectJoList
-	public List<MemberDTO> selectJoList(String jno);
-
+	public List<Member> findByJno(int jno);
+	
+	   // ** Join
+	public List<MemberDTO> findMemberJoin();
+	
+	public List<MemberDTO> findMemberJoin2();
 }
