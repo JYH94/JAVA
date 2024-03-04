@@ -43,4 +43,5 @@ public class Guestbook extends BaseEntity {
 	public void changeContent(String content) {
 		this.content = content;
 	}
+	
 }

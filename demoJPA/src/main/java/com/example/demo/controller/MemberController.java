@@ -44,7 +44,7 @@ public class MemberController {
 	// => MemberDTO 는 JoDTO 상속
 	   @GetMapping("/mjoinList")
 	   public void mjoinList(Model model) {
-	      model.addAttribute("banana", service.findMemberJoin2());
+	      model.addAttribute("banana", service.findMemberJoin());
 	   }
 	
 	

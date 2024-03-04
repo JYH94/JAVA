@@ -153,22 +153,21 @@ public interface MemberRepository extends JpaRepository<Member, String> {
 
 	// 2.2) NativeQuery
 	// => nativeQuery 속성 true, Table명 사용
-
 	@Transactional
 	@Modifying
-	@Query(nativeQuery = true, value = "update member set password=:password where id=:id")
+	@Query(nativeQuery = true
+			,value = "update member set password=:password where id=:id")
 	public void updatePassword2(@Param("id") String id, @Param("password") String password);
-
 	// 2.3) Join 구문에 @Query 적용
 	// => JPQL
 	// 앞에 new 가 붙은 이유는 Entity가 아니라 DTO로 return받기 위해   
 	// 1번과 마찬가지로 여기서 Member란 Entity명이기 때문에 대소문자 주의
 	@Query("SELECT new com.example.demo.domain.MemberDTO(m.id, m.name, m.jno, j.jname, j.project) FROM Member m LEFT JOIN Jo j ON m.jno=j.jno order by m.jno")
 	List<MemberDTO> findMemberJoin();
-	
+
 	
 	@Query(nativeQuery = true
-			,value="SELECT new com.example.demo.domain.MemberDTO(m.id, m.name, m.jno, j.jname, j.project) FROM Member m LEFT JOIN Jo j ON m.jno=j.jno order by m.jno")
+			,value="SELECT m.id, m.name, m.jno, j.jname, j.project FROM member m LEFT JOIN Jo j ON m.jno=j.jno order by m.jno")
 	List<MemberDTO> findMemberJoin2();
 	
 }
