@@ -201,14 +201,14 @@ function checkClear() {
   		<font color="Orange" size="5"><b>${i}</b></font>&nbsp;
   	</c:if>
   	<c:if test="${i!=pageMaker.cri.currPage}">
-  		<a href="bPageList${pageMaker.searchQuery(i)}">${i}</a>&nbsp;
+  		<a href="${pageMaker.searchQuery(i)}">${i}</a>&nbsp;
   	</c:if>
   </c:forEach>
 <!-- 3) Next, LastPage  -->
   <c:choose>
   	<c:when test="${pageMaker.next && pageMaker.epageNo>0}">
-  		&nbsp;<a href="bPageList${pageMaker.searchQuery(pageMaker.epageNo+1)}">&GT;</a>
-  		&nbsp;<a href="bPageList${pageMaker.searchQuery(pageMaker.lastPageNo)}">LP</a>
+  		&nbsp;<a href="${pageMaker.searchQuery(pageMaker.epageNo+1)}">&GT;</a>
+  		&nbsp;<a href="${pageMaker.searchQuery(pageMaker.lastPageNo)}">LP</a>
   	</c:when>
   	<c:otherwise>
   		<font color="Gray">&nbsp;&GT;&nbsp;LP</font>
